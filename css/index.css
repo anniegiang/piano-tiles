@@ -5,5 +5,9 @@ body {
 
 #piano-tiles {
   border: 1px solid black;
-  margin-left: 30%;
+  margin-left: 33%;
+}
+
+#title {
+  text-align: center;
 }

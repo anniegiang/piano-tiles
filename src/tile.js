@@ -1,8 +1,8 @@
 // Model
 /*
-  1 = target
-  0 = non-target
-  -1 = wrong
+  1 = target (yellow)
+  0 = non-target (pink)
+  -1 = wrong (yellow)
 */
 
 const CONST = {
@@ -20,7 +20,8 @@ class Tile {
   }
 
   drawTile(ctx) {
-    ctx.fillStyle = this.color === 1 ? "#333" : "rgba(255, 0, 0, 0.5)";
+    ctx.fillStyle =
+      this.color === 1 ? "rgba(255, 255, 0, 0.5 )" : "rgba(255, 0, 0, 0.5)";
     ctx.fillRect(this.x, this.y, CONST.WIDTH, CONST.HEIGHT);
   }
 }

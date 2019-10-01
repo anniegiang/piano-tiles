@@ -9,6 +9,11 @@ class Game {
     this.grid = [];
   }
 
+  renderGrid() {
+    this.board.createGrid(this.ctx);
+    this.board.renderGrid(this.ctx);
+  }
+
   renderRow() {
     this.board.renderRow(this.ctx);
   }

@@ -86,39 +86,14 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/board.js":
-/*!**********************!*\
-  !*** ./src/board.js ***!
-  \**********************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n!(function webpackMissingModule() { var e = new Error(\"Cannot find module '/tile'\"); e.code = 'MODULE_NOT_FOUND'; throw e; }());\n\n\nconst CONSTANTS = {\n  COLOR: \"rgba(255, 0, 0, 0.5)\",\n  TARGET: \"rgba(255, 255, 0, 0.5)\"\n};\n\nclass Board {\n  constructor(dimentions) {\n    this.dimentions = dimentions;\n    this.board = new Array(26);\n  }\n\n  renderTile() {\n    let tile = new !(function webpackMissingModule() { var e = new Error(\"Cannot find module '/tile'\"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(0, 255, CONSTANTS.COLOR, \"j\");\n    tile.drawTile();\n  }\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Board);\n\n\n//# sourceURL=webpack:///./src/board.js?");
-
-/***/ }),
-
-/***/ "./src/game.js":
-/*!*********************!*\
-  !*** ./src/game.js ***!
-  \*********************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _board__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./board */ \"./src/board.js\");\n\n\nclass Game {\n  constructor(canvas) {\n    this.ctx = canvas.getContext(\"2d\");\n    this.dimensions = { width: canvas.width, height: canvas.height };\n    this.board = new _board__WEBPACK_IMPORTED_MODULE_0__[\"default\"](this.dimentions);\n  }\n\n  renderBoard() {\n    this.board.renderTile();\n  }\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Game);\n\n\n//# sourceURL=webpack:///./src/game.js?");
-
-/***/ }),
-
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _game__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./game */ \"./src/game.js\");\n\n\nconst canvas = document.querySelector(\"#piano-tiles\");\n\nlet game = new _game__WEBPACK_IMPORTED_MODULE_0__[\"default\"](canvas);\n\ngame.renderBoard();\n\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ })
 

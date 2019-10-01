@@ -1,14 +1,14 @@
 const CONSTANTS = {
-  TILE_WIDTH: 100,
-  TILE_HEIGHT: 130
+  TILE_WIDTH: 111,
+  TILE_HEIGHT: 155
 };
 
 class Tile {
-  constructor(dimentions, color) {
-    this.dimentions = dimentions;
-    this.x = this.dimentions.width / 2;
-    this.y = this.dimentions.height / 2;
+  constructor(x, y, color, key) {
+    this.x = x;
+    this.y = y;
     this.color = color;
+    this.key = key;
   }
 
   drawTile(ctx) {

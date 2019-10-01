@@ -86,6 +86,18 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/board.js":
+/*!**********************!*\
+  !*** ./src/board.js ***!
+  \**********************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n!(function webpackMissingModule() { var e = new Error(\"Cannot find module '/tile'\"); e.code = 'MODULE_NOT_FOUND'; throw e; }());\n\n\nclass Board {\n  constructor(dimentions) {\n    this.dimentions = dimentions;\n    this.board = new Array(26);\n  }\n\n  generateRow() {\n    let row = new Array(4);\n    let randIdx = Math.random() * row.length;\n    row[randIdx] = new !(function webpackMissingModule() { var e = new Error(\"Cannot find module '/tile'\"); e.code = 'MODULE_NOT_FOUND'; throw e; }())()\n  }\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Board);\n\n\n//# sourceURL=webpack:///./src/board.js?");
+
+/***/ }),
+
 /***/ "./src/game.js":
 /*!*********************!*\
   !*** ./src/game.js ***!
@@ -94,7 +106,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _tile__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tile */ \"./src/tile.js\");\n\n\nclass Game {\n  constructor(canvas) {\n    this.ctx = canvas.getContext(\"2d\");\n    this.dimensions = { width: canvas.width, height: canvas.height };\n  }\n\n  createTile() {\n    let dimentions = { width: 100, height: 300 };\n    let t = new _tile__WEBPACK_IMPORTED_MODULE_0__[\"default\"](dimentions, \"black\");\n    t.drawTile(this.ctx);\n  }\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Game);\n\n\n//# sourceURL=webpack:///./src/game.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _board__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./board */ \"./src/board.js\");\n\n\nclass Game {\n  constructor(canvas) {\n    this.ctx = canvas.getContext(\"2d\");\n    this.dimensions = { width: canvas.width, height: canvas.height };\n    this.board = new _board__WEBPACK_IMPORTED_MODULE_0__[\"default\"](dimentions);\n  }\n\n  renderBoard() {\n    this.board.render();\n  }\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Game);\n\n\n//# sourceURL=webpack:///./src/game.js?");
 
 /***/ }),
 
@@ -106,19 +118,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _til
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _game__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./game */ \"./src/game.js\");\n\n\nconst canvas = document.querySelector(\"#piano-tiles\");\n\nlet g = new _game__WEBPACK_IMPORTED_MODULE_0__[\"default\"](canvas);\ng.createTile();\n\n\n//# sourceURL=webpack:///./src/index.js?");
-
-/***/ }),
-
-/***/ "./src/tile.js":
-/*!*********************!*\
-  !*** ./src/tile.js ***!
-  \*********************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nconst CONSTANTS = {\n  TILE_WIDTH: 100,\n  TILE_HEIGHT: 130\n};\n\nclass Tile {\n  constructor(dimentions, color) {\n    this.dimentions = dimentions;\n    this.x = this.dimentions.width / 2;\n    this.y = this.dimentions.height / 2;\n    this.color = color;\n  }\n\n  drawTile(ctx) {\n    ctx.fillStyle = this.color;\n    ctx.fillRect(this.x, this.y, CONSTANTS.TILE_WIDTH, CONSTANTS.TILE_HEIGHT);\n  }\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Tile);\n\n\n//# sourceURL=webpack:///./src/tile.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _game__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./game */ \"./src/game.js\");\n\n\nconst canvas = document.querySelector(\"#piano-tiles\");\n\nlet g = new _game__WEBPACK_IMPORTED_MODULE_0__[\"default\"](canvas);\n\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ })
 

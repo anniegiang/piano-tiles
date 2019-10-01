@@ -1,8 +1,14 @@
 // Model
+/*
+  1 = target
+  0 = non-target
+  -1 = wrong
+*/
 
 const CONST = {
   WIDTH: 100,
-  HEIGHT: 150
+  HEIGHT: 150,
+  SPACING: 2
 };
 
 class Tile {
@@ -13,15 +19,9 @@ class Tile {
     this.key = key;
   }
 
-  drawTile() {
-    /*
-  1 = black
-  0 = white
-  -1 = red
-*/
-    context.fillStyle =
-      this.color === 1 ? "#333" : this.color === -1 ? "#f00" : "#fff";
-    context.fillRect(this.x, this.y, CONST.WIDTH, CONST.HEIGHT);
+  drawTile(ctx) {
+    ctx.fillStyle = this.color === 1 ? "#333" : "rgba(255, 0, 0, 0.5)";
+    ctx.fillRect(this.x, this.y, CONST.WIDTH, CONST.HEIGHT);
   }
 }
 

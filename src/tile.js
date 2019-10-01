@@ -2,7 +2,7 @@
 /*
   1 = target (yellow)
   0 = non-target (pink)
-  -1 = wrong (yellow)
+  -1 = wrong (black)
 */
 
 const CONST = {

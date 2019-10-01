@@ -6,16 +6,17 @@ class Game {
   constructor(canvas) {
     this.ctx = canvas.getContext("2d");
     this.board = new Board(4, 4);
-    this.grid = [];
   }
 
-  renderGrid() {
-    this.board.createGrid(this.ctx);
+  animate() {
+    requestAnimationFrame(this.animate.bind(this));
+    // this.ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    this.board.animate(this.ctx);
+  }
+
+  start() {
     this.board.renderGrid(this.ctx);
-  }
-
-  renderRow() {
-    this.board.renderRow(this.ctx);
+    requestAnimationFrame(this.animate.bind(this));
   }
 }
 

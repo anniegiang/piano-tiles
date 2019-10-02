@@ -25,12 +25,14 @@ class Game {
   }
 
   click(e) {
-    if (!this.running) {
-      // play if  not running & the mouse click is clicked on the target
+    // play if not running & the mouse click is clicked on the target
+    if (
+      !this.running &&
+      this.board.isValidTargetBoundary(e.offsetX, e.offsetY)
+    ) {
       this.play();
-      console.log(this.board.isValidTargetBoundary(e.offsetX, e.offsetY));
-      // console.log("x: ", e.offsetX);
-      // console.log("y: ", e.offsetY);
+    } else {
+      this.board.moveCurrentRow();
     }
   }
 

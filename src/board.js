@@ -4,7 +4,7 @@ const CONST = {
   WIDTH: 100,
   HEIGHT: 150,
   KEYS: ["d", "f", "j", "k"],
-  VELOCITY: 1
+  VELOCITY: 10
 };
 
 class Board {
@@ -48,16 +48,15 @@ class Board {
     });
   }
 
-  moveRows() {
-    this.grid.forEach(row => {
-      row.forEach(tile => {
-        // if the correct target in the current row is clicked
-        //  remove the borrom row (shift)
-        // create a new row (push)
-        // push all rows down by adding to the tile's height
-        // get current Row
-      });
-    });
+  moveCurrentRow() {
+    let row = this.getCurrentRow();
+    for (let tile of row) {
+      tile.y += CONST.VELOCITY;
+      if (tile.y >= this.dimentions.height) {
+        this.grid.shift();
+        this.grid.push(this.createRow());
+      }
+    }
   }
 
   getCurrentRow() {
@@ -108,7 +107,7 @@ class Board {
   }
 
   animate(ctx) {
-    this.moveRows();
+    this.moveCurrentRow();
     this.drawGrid(ctx);
   }
 }

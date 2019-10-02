@@ -18,7 +18,6 @@ class Board {
     for (let i = 0; i < this.rows; i++) {
       this.grid.push(this.createRow(i));
     }
-    console.log(this.grid);
   }
 
   createRow(r = 0) {
@@ -76,7 +75,6 @@ class Board {
   }
 
   validTargetBoundary() {
-    let validBoundary = this.validBoundary();
     let currentTargetPos = this.currentTargetPosition();
 
     let minX = currentTargetPos.targetX;
@@ -98,7 +96,16 @@ class Board {
     return { minValidHeight, maxValidHeight, minValidWidth, maxValidWidth };
   }
 
-  isValidTargetBoundary(mX, mY) {}
+  isValidTargetBoundary(mX, mY) {
+    let { minX, maxX, minY, maxY } = this.validTargetBoundary();
+
+    let withinX = mX >= minX && mX <= maxX;
+    let withinY = mY >= minY && mY <= maxY;
+    if (withinX && withinY) {
+      return true;
+    }
+    return false;
+  }
 
   animate(ctx) {
     this.moveRows();

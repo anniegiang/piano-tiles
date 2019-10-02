@@ -28,7 +28,7 @@ class Game {
     if (!this.running) {
       // play if  not running & the mouse click is clicked on the target
       this.play();
-      console.log(this.board.validBoundary());
+      console.log(this.board.isValidTargetBoundary(e.offsetX, e.offsetY));
       // console.log("x: ", e.offsetX);
       // console.log("y: ", e.offsetY);
     }

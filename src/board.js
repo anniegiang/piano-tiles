@@ -18,6 +18,7 @@ class Board {
     for (let i = 0; i < this.rows; i++) {
       this.grid.push(this.createRow(i));
     }
+    console.log(this.grid);
   }
 
   createRow(r = 0) {
@@ -60,28 +61,44 @@ class Board {
     });
   }
 
-  currentRow() {
-    this.currentRow = this.grid[0];
+  getCurrentRow() {
+    return this.grid[this.grid.length - 1];
   }
 
   currentTargetPosition() {
-    this.currentRow.forEach(row => {
-      if (row.color === 1) {
-        return { x: row.x, y: row.y };
+    let currentRow = this.getCurrentRow();
+    for (let tile of currentRow) {
+      if (tile.color === 1) {
+        let res = { targetX: tile.x, targetY: tile.y };
+        return res;
       }
-    });
+    }
+  }
+
+  validTargetBoundary() {
+    let validBoundary = this.validBoundary();
+    let currentTargetPos = this.currentTargetPosition();
+
+    let minX = currentTargetPos.targetX;
+    let maxX = currentTargetPos.targetX + CONST.WIDTH;
+
+    let minY = currentTargetPos.targetY;
+    let maxY = currentTargetPos.targetY + CONST.HEIGHT;
+
+    return { minX, maxX, minY, maxY };
   }
 
   validBoundary() {
+    let minValidWidth = 0;
+    let maxValidWidth = this.dimentions.width;
+
     let minValidHeight = this.dimentions.height - CONST.HEIGHT;
     let maxValidHeight = minValidHeight + CONST.HEIGHT;
 
-    let minValidWidth = 0;
-    let maxValidWidth = CONST.WIDTH;
     return { minValidHeight, maxValidHeight, minValidWidth, maxValidWidth };
   }
 
-  validTargetBoundary(mX, mY) {}
+  isValidTargetBoundary(mX, mY) {}
 
   animate(ctx) {
     this.moveRows();

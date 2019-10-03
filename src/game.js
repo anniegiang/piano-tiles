@@ -6,6 +6,7 @@ class Game {
   constructor(canvas) {
     this.ctx = canvas.getContext("2d");
     this.dimentions = { width: canvas.width, height: canvas.height };
+
     this.registerEvents();
     this.restart();
   }
@@ -25,14 +26,11 @@ class Game {
   }
 
   click(e) {
-    // play if not running & the mouse click is clicked on the target
     if (
       !this.running &&
       this.board.isValidTargetBoundary(e.offsetX, e.offsetY)
     ) {
       this.play();
-    } else {
-      this.board.moveCurrentRow();
     }
   }
 

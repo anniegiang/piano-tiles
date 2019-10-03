@@ -48,13 +48,10 @@ class Board {
     });
   }
 
-  moveCurrentRow() {
-    let row = this.getCurrentRow();
-    for (let tile of row) {
-      tile.y += CONST.VELOCITY;
-      if (tile.y >= this.dimentions.height) {
-        this.grid.shift();
-        this.grid.push(this.createRow());
+  moveRows() {
+    for (let row of this.grid) {
+      for (let tile of row) {
+        tile.y += CONST.VELOCITY;
       }
     }
   }
@@ -107,7 +104,7 @@ class Board {
   }
 
   animate(ctx) {
-    this.moveCurrentRow();
+    this.moveRows();
     this.drawGrid(ctx);
   }
 }

@@ -60,8 +60,6 @@ class Board {
   }
 
   getTargetRow() {
-    console.log("target row: ", this.grid);
-    // debugger;
     return this.grid[this.grid.length - 1];
   }
 
@@ -87,29 +85,19 @@ class Board {
     return { minX, maxX, minY, maxY };
   }
 
-  validBoundary() {
-    let minValidWidth = 0;
-    let maxValidWidth = this.dimentions.width;
-
-    let minValidHeight = this.dimentions.height - CONST.HEIGHT;
-    let maxValidHeight = minValidHeight + CONST.HEIGHT;
-
-    return { minValidHeight, maxValidHeight, minValidWidth, maxValidWidth };
-  }
-
   isValidTargetBoundary(mX, mY) {
     let bounds = this.validTargetBoundary();
     let { minX, maxX, minY, maxY } = bounds;
-    console.log("target bounds: ", bounds);
-    console.log("valid target?");
 
     let withinX = mX >= minX && mX <= maxX;
     let withinY = mY >= minY && mY <= maxY;
-    if (withinX && withinY) {
-      return true;
-    }
+
+    if (withinX && withinY) return true;
+
     return false;
   }
+
+  getClickedTile(mX, mY) {}
 
   animate(ctx) {
     this.drawGrid(ctx);

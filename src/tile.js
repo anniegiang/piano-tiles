@@ -3,8 +3,13 @@
   1 = target (yellow)
   0 = non-target (pink)
   -1 = wrong (black)
-  2 = correct {grey}
 */
+
+const COLORS = {
+  target: "rgba(255, 255, 0, 0.5)",
+  normal: "rgba(255, 0, 0, 0.5)",
+  wrong: "rgb(0, 0, 0, 0.5)"
+};
 
 const CONST = {
   WIDTH: 100,
@@ -21,8 +26,7 @@ class Tile {
   }
 
   drawTile(ctx) {
-    ctx.fillStyle =
-      this.color === 1 ? "rgba(255, 255, 0, 0.5 )" : "rgba(255, 0, 0, 0.5)";
+    ctx.fillStyle = this.color === 1 ? COLORS.target : COLORS.normal;
     ctx.fillRect(this.x, this.y, CONST.WIDTH, CONST.HEIGHT);
   }
 

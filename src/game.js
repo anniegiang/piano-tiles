@@ -8,16 +8,13 @@ class Game {
     this.dimentions = { width: canvas.width, height: canvas.height };
 
     this.registerEvents();
-    this.restart();
+    this.start();
   }
 
-  animate() {
-    this.ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-    this.board.animate(this.ctx);
-
-    if (this.running) {
-      requestAnimationFrame(this.animate.bind(this));
-    }
+  start() {
+    this.board = new Board(this.dimentions, 4, 4);
+    this.move = this.board.move; // false at the start
+    this.animate();
   }
 
   registerEvents() {
@@ -26,23 +23,35 @@ class Game {
   }
 
   click(e) {
-    if (
-      !this.running &&
-      this.board.isValidTargetBoundary(e.offsetX, e.offsetY)
-    ) {
+    if (!this.move && this.board.isValidTargetBoundary(e.offsetX, e.offsetY)) {
       this.play();
     }
   }
 
-  restart() {
-    this.running = false;
-    this.board = new Board(this.dimentions, 4, 4);
+  play() {
+    // this.move = !this.board.move;
+    this.board.move = !this.board.move;
     this.animate();
   }
 
-  play() {
-    this.running = true;
-    this.animate();
+  animate() {
+    this.ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    this.animateGrid();
+    this.update();
+
+    if (this.move) {
+      requestAnimationFrame(this.animate.bind(this));
+    }
+  }
+
+  update() {
+    if (this.move) {
+      this.board.moveRows();
+    }
+  }
+
+  animateGrid() {
+    this.board.animate(this.ctx);
   }
 }
 

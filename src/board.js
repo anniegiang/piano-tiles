@@ -12,6 +12,7 @@ class Board {
     this.dimentions = dimentions;
     this.rows = rows;
     this.columns = columns;
+    this.move = false;
     this.grid = []; // 2d array
 
     // initialize rows to display at the start
@@ -52,6 +53,7 @@ class Board {
     for (let row of this.grid) {
       for (let tile of row) {
         tile.y += CONST.VELOCITY;
+        this.move = false;
       }
     }
   }
@@ -104,8 +106,10 @@ class Board {
   }
 
   animate(ctx) {
-    this.moveRows();
     this.drawGrid(ctx);
+    if (this.move) {
+      this.moveRows();
+    }
   }
 }
 

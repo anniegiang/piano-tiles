@@ -13,7 +13,7 @@ class Game {
 
   start() {
     this.board = new Board(this.dimentions, 4, 4);
-    this.move = this.board.move; // false at the start
+    // this.move = this.board.move; // false at the start
     this.animate();
   }
 
@@ -29,8 +29,8 @@ class Game {
   }
 
   play() {
-    // this.move = !this.board.move;
     this.board.move = !this.board.move;
+
     this.animate();
   }
 
@@ -39,13 +39,13 @@ class Game {
     this.animateGrid();
     this.update();
 
-    if (this.move) {
+    if (!this.board.move) {
       requestAnimationFrame(this.animate.bind(this));
     }
   }
 
   update() {
-    if (this.move) {
+    if (this.board.move) {
       this.board.moveRows();
     }
   }

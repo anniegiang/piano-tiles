@@ -4,7 +4,7 @@ const CONST = {
   WIDTH: 100,
   HEIGHT: 150,
   KEYS: ["d", "f", "j", "k"],
-  VELOCITY: 10
+  VELOCITY: 150
 };
 
 class Board {
@@ -52,8 +52,10 @@ class Board {
   moveRows() {
     for (let row of this.grid) {
       for (let tile of row) {
-        tile.y += CONST.VELOCITY;
-        this.move = false;
+        tile.y += CONST.HEIGHT;
+        if (tile.y >= CONST.HEIGHT) {
+          // this.move = !this.move;
+        }
       }
     }
   }
@@ -107,9 +109,6 @@ class Board {
 
   animate(ctx) {
     this.drawGrid(ctx);
-    if (this.move) {
-      this.moveRows();
-    }
   }
 }
 

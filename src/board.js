@@ -3,7 +3,6 @@ import Tile from "./tile";
 const CONST = {
   WIDTH: 100,
   HEIGHT: 150,
-  KEYS: ["d", "f", "j", "k"],
   VELOCITY: 150
 };
 
@@ -13,7 +12,7 @@ class Board {
     this.rows = rows;
     this.columns = columns;
     this.move = false;
-    this.grid = []; // 2d array
+    this.grid = []; // 2d array, target row = last el in arr
 
     // initialize rows to display at the start
     for (let i = 0; i < this.rows; i++) {
@@ -32,9 +31,9 @@ class Board {
       tY = r * CONST.HEIGHT; // calculate y position given r
 
       if (targetIdx === i) {
-        tile = new Tile(tX, tY, 1, CONST.KEYS[i]); //  target color = 1
+        tile = new Tile(tX, tY, 1); //  target color = 1
       } else {
-        tile = new Tile(tX, tY, 0, CONST.KEYS[i]);
+        tile = new Tile(tX, tY, 0);
       }
       row.push(tile);
     }
@@ -55,15 +54,19 @@ class Board {
         tile.y += CONST.HEIGHT;
       }
     }
-    this.grid.push(this.createRow());
+    this.move = !this.move;
+    this.grid.unshift(this.createRow());
+    this.grid.pop();
   }
 
-  getCurrentRow() {
+  getTargetRow() {
+    console.log("target row: ", this.grid);
+    // debugger;
     return this.grid[this.grid.length - 1];
   }
 
   currentTargetPosition() {
-    let currentRow = this.getCurrentRow();
+    let currentRow = this.getTargetRow();
     for (let tile of currentRow) {
       if (tile.color === 1) {
         let res = { targetX: tile.x, targetY: tile.y };
@@ -95,7 +98,10 @@ class Board {
   }
 
   isValidTargetBoundary(mX, mY) {
-    let { minX, maxX, minY, maxY } = this.validTargetBoundary();
+    let bounds = this.validTargetBoundary();
+    let { minX, maxX, minY, maxY } = bounds;
+    console.log("target bounds: ", bounds);
+    console.log("valid target?");
 
     let withinX = mX >= minX && mX <= maxX;
     let withinY = mY >= minY && mY <= maxY;

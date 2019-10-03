@@ -23,21 +23,24 @@ class Game {
   }
 
   click(e) {
-    if (!this.move && this.board.isValidTargetBoundary(e.offsetX, e.offsetY)) {
+    if (this.board.isValidTargetBoundary(e.offsetX, e.offsetY)) {
+      console.log("valid click :)");
       this.play();
+    } else {
+      console.log("invalid click :(");
     }
   }
 
   play() {
+    console.log("play!");
     this.board.move = !this.board.move;
-
     this.animate();
   }
 
   animate() {
     this.ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-    this.animateGrid();
     this.update();
+    this.animateGrid();
 
     if (!this.board.move) {
       requestAnimationFrame(this.animate.bind(this));

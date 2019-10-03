@@ -53,11 +53,9 @@ class Board {
     for (let row of this.grid) {
       for (let tile of row) {
         tile.y += CONST.HEIGHT;
-        if (tile.y >= CONST.HEIGHT) {
-          // this.move = !this.move;
-        }
       }
     }
+    this.grid.push(this.createRow());
   }
 
   getCurrentRow() {

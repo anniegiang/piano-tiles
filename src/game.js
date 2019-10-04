@@ -8,7 +8,8 @@ class Game {
     this.dimentions = { width: canvas.width, height: canvas.height };
     this.gameOver = false;
     this.second = 0;
-    this.milliSec = 0;
+    this.millSec = 0;
+    this.startTimer = false;
     this.registerEvents();
     this.start();
   }
@@ -28,6 +29,7 @@ class Game {
       !this.gameOver &&
       this.board.isValidTargetBoundary(e.offsetX, e.offsetY)
     ) {
+      this.startTimer = true;
       this.play();
     } else {
       this.board.renderWrongTile(this.ctx, e.offsetX, e.offsetY);
@@ -37,21 +39,21 @@ class Game {
 
   play() {
     this.board.move = !this.board.move;
-    this.renderTime();
     this.animate();
   }
 
   animate() {
     this.ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
     this.animateGrid();
-    this.update();
+    this.updateGrid();
+    this.renderTime();
 
-    if (!this.board.move && !this.gameOver) {
+    if (!this.gameOver) {
       requestAnimationFrame(this.animate.bind(this));
     }
   }
 
-  update() {
+  updateGrid() {
     if (this.board.move) {
       this.board.moveRows();
     }
@@ -62,8 +64,21 @@ class Game {
   }
 
   renderTime() {
-    const timer = document.querySelector("#timer");
-    timer.textContent = this.second++;
+    if (this.startTimer) {
+      const timer = document.querySelector("#timer");
+      timer.textContent = this.second + "." + this.millSec++ + "''";
+
+      if (this.millSec === 0) {
+        timer.textContent = this.second + "." + "000" + "''";
+      }
+
+      if (this.millSec >= 999) {
+        this.millSec = 0;
+        this.second++;
+      }
+    } else {
+      timer.textContent = this.second + "." + "000" + "''";
+    }
   }
 }
 

@@ -97,7 +97,39 @@ class Board {
     return false;
   }
 
-  getClickedTile(mX, mY) {}
+  getClickedTile(mX, mY) {
+    let targetRow = this.getTargetRow();
+    let res = {};
+
+    for (let t = 0; t < targetRow.length; t++) {
+      let tile = targetRow[t];
+      let minX = tile.x;
+      let minY = tile.y;
+      let maxX = minX + CONST.WIDTH;
+      let maxY = minY + CONST.HEIGHT;
+
+      let withinX = mX >= minX && mX <= maxX;
+      let withinY = mY >= minY && mY <= maxY;
+
+      if (withinX && withinY) {
+        res.tile = tile;
+        res.tileIdx = t;
+      }
+    }
+    return res;
+  }
+
+  renderWrongTile(ctx, mX, mY) {
+    let res = this.getClickedTile(mX, mY);
+    let { tileIdx, tile } = res;
+    let newTile = new Tile(tile.x, tile.y, -1);
+    this.replaceTile(newTile, tileIdx);
+  }
+
+  replaceTile(newTile, tileIdx) {
+    let targetRow = this.getTargetRow();
+    targetRow[tileIdx] = newTile;
+  }
 
   animate(ctx) {
     this.drawGrid(ctx);

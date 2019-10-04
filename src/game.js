@@ -6,14 +6,13 @@ class Game {
   constructor(canvas) {
     this.ctx = canvas.getContext("2d");
     this.dimentions = { width: canvas.width, height: canvas.height };
-
+    this.gameOver = false;
     this.registerEvents();
     this.start();
   }
 
   start() {
     this.board = new Board(this.dimentions, 4, 4);
-    // this.move = this.board.move; // false at the start
     this.animate();
   }
 
@@ -23,8 +22,14 @@ class Game {
   }
 
   click(e) {
-    if (this.board.isValidTargetBoundary(e.offsetX, e.offsetY)) {
+    if (
+      !this.gameOver &&
+      this.board.isValidTargetBoundary(e.offsetX, e.offsetY)
+    ) {
       this.play();
+    } else {
+      this.board.renderWrongTile(this.ctx, e.offsetX, e.offsetY);
+      this.gameOver = true;
     }
   }
 

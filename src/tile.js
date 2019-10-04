@@ -18,21 +18,19 @@ const CONST = {
 };
 
 class Tile {
-  constructor(x, y, color, key) {
+  constructor(x, y, color) {
     this.x = x;
     this.y = y;
     this.color = color;
-    this.key = key;
   }
 
   drawTile(ctx) {
-    ctx.fillStyle = this.color === 1 ? COLORS.target : COLORS.normal;
-    ctx.fillRect(this.x, this.y, CONST.WIDTH, CONST.HEIGHT);
-  }
-
-  changeColor(ctx, color) {
-    this.color = color;
-    ctx.fillStyle = this.color === 2 ? "rgba(0, 0, 0, 0.5 )" : "rgb(0, 0, 0)";
+    ctx.fillStyle =
+      this.color === 1
+        ? COLORS.target
+        : this.color === -1
+        ? COLORS.wrong
+        : COLORS.normal;
     ctx.fillRect(this.x, this.y, CONST.WIDTH, CONST.HEIGHT);
   }
 }

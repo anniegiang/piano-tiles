@@ -7,9 +7,9 @@ class Game {
     this.ctx = canvas.getContext("2d");
     this.dimentions = { width: canvas.width, height: canvas.height };
     this.gameOver = false;
+    this.startTimer = false;
     this.second = 0;
     this.millSec = 0;
-    this.startTimer = false;
     this.registerEvents();
     this.start();
   }
@@ -29,7 +29,6 @@ class Game {
       !this.gameOver &&
       this.board.isValidTargetBoundary(e.offsetX, e.offsetY)
     ) {
-      this.startTimer = true;
       this.play();
     } else {
       this.board.renderWrongTile(this.ctx, e.offsetX, e.offsetY);
@@ -39,6 +38,7 @@ class Game {
 
   play() {
     this.board.move = !this.board.move;
+    this.startTimer = true;
     this.animate();
   }
 
@@ -64,15 +64,10 @@ class Game {
   }
 
   renderTime() {
+    const timer = document.querySelector("#timer");
     if (this.startTimer) {
-      const timer = document.querySelector("#timer");
       timer.textContent = this.second + "." + this.millSec++ + "''";
-
-      if (this.millSec === 0) {
-        timer.textContent = this.second + "." + "000" + "''";
-      }
-
-      if (this.millSec >= 999) {
+      if (this.millSec >= 1000) {
         this.millSec = 0;
         this.second++;
       }

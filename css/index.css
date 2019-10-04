@@ -11,11 +11,12 @@ body {
 }
 
 #piano-tiles {
-  /* border: 1px solid black; */
-  margin-left: 37%;
-  /* margin-top: 5%; */
+  border: 10px solid rgba(0, 0, 255, 0.3);
+  margin-left: 38%;
+  margin-top: 2%;
 }
 
-#title {
+#title,
+h3 {
   text-align: center;
 }

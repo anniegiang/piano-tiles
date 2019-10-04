@@ -43,7 +43,7 @@ class Game {
     this.animateGrid();
     this.update();
 
-    if (!this.board.move) {
+    if (!this.board.move && !this.gameOver) {
       requestAnimationFrame(this.animate.bind(this));
     }
   }

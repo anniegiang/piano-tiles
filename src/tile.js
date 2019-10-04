@@ -6,9 +6,9 @@
 */
 
 const COLORS = {
-  target: "rgba(255, 255, 0, 0.5)",
-  normal: "rgba(255, 0, 0, 0.5)",
-  wrong: "rgb(0, 0, 0, 0.2)"
+  target: "rgba(255, 255, 0, 0.9)",
+  normal: "rgba(100, 0, 255, 0.7)",
+  wrong: "rgba(0, 0, 0, 0.8)"
 };
 
 const CONST = {

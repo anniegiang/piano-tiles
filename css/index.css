@@ -3,21 +3,24 @@ html {
 }
 
 body {
+  background-image: url("https://ak1.picdn.net/shutterstock/videos/1019429191/thumb/1.jpg");
+  background-repeat: no-repeat, repeat;
+  background-size: cover;
   height: 100%;
   margin: 0;
   padding: 0;
-  background-color: #fff;
+  color: #fff;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 #piano-tiles {
-  border: 10px solid rgba(0, 0, 255, 0.3);
+  border: 10px solid rgba(100, 0, 255, 1);
   border-radius: 20px;
-  margin-left: 38%;
-  margin-top: 2%;
+  margin-left: 39%;
+  margin-top: 1%;
 }
 
 #title,
-h3 {
+h1 {
   text-align: center;
 }

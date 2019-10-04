@@ -7,6 +7,8 @@ class Game {
     this.ctx = canvas.getContext("2d");
     this.dimentions = { width: canvas.width, height: canvas.height };
     this.gameOver = false;
+    this.second = 0;
+    this.milliSec = 0;
     this.registerEvents();
     this.start();
   }
@@ -35,6 +37,7 @@ class Game {
 
   play() {
     this.board.move = !this.board.move;
+    this.renderTime();
     this.animate();
   }
 
@@ -56,6 +59,11 @@ class Game {
 
   animateGrid() {
     this.board.animate(this.ctx);
+  }
+
+  renderTime() {
+    const timer = document.querySelector("#timer");
+    timer.textContent = this.second++;
   }
 }
 

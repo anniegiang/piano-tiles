@@ -8,8 +8,10 @@ class Game {
     this.dimentions = { width: canvas.width, height: canvas.height };
     this.gameOver = false;
     this.startTimer = false;
+    this.startCount = false;
     this.second = 0;
     this.millSec = 0;
+    this.count = 0;
     this.registerEvents();
     this.start();
   }
@@ -39,6 +41,8 @@ class Game {
   play() {
     this.board.move = !this.board.move;
     this.startTimer = true;
+    this.startCount = true;
+    this.renderCount();
     this.animate();
   }
 
@@ -47,7 +51,6 @@ class Game {
     this.animateGrid();
     this.updateGrid();
     this.renderTime();
-
     if (!this.gameOver) {
       requestAnimationFrame(this.animate.bind(this));
     }
@@ -61,6 +64,14 @@ class Game {
 
   animateGrid() {
     this.board.animate(this.ctx);
+  }
+
+  renderCount() {
+    const counter = document.querySelector("#counter");
+
+    if (this.startCount) {
+      counter.textContent = ++this.count;
+    }
   }
 
   renderTime() {

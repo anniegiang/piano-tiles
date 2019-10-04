@@ -3,7 +3,7 @@ html {
 }
 
 body {
-  background-image: url("https://ak1.picdn.net/shutterstock/videos/1019429191/thumb/1.jpg");
+  background-image: url("https://cdn.dribbble.com/users/319473/screenshots/4111136/reinvently_insights_3.0.gif");
   background-repeat: no-repeat, repeat;
   background-size: cover;
   height: 100%;
@@ -14,7 +14,7 @@ body {
 }
 
 #piano-tiles {
-  border: 10px solid rgba(100, 0, 255, 1);
+  border: 7px solid rgba(100, 0, 255, 0.7);
   border-radius: 20px;
   margin-left: 39%;
   margin-top: 1%;

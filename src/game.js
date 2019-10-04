@@ -9,9 +9,9 @@ class Game {
     this.gameOver = false;
     this.startTimer = false;
     this.startCount = false;
+    this.count = 0;
     this.second = 0;
     this.millSec = 0;
-    this.count = 0;
     this.registerEvents();
     this.start();
   }
@@ -22,8 +22,26 @@ class Game {
   }
 
   registerEvents() {
+    const playBtn = document.querySelector("#play-btn");
+
     this.boundClickHandler = this.click.bind(this);
+    this.boundRestartHandler = this.restart.bind(this);
+
     this.ctx.canvas.addEventListener("mousedown", this.boundClickHandler);
+    playBtn.addEventListener("click", this.boundRestartHandler);
+  }
+
+  restart() {
+    this.ctx.canvas.addEventListener("mousedown", this.boundClickHandler);
+    const counter = document.querySelector("#counter");
+    this.gameOver = false;
+    this.startTimer = false;
+    this.startCount = false;
+    this.second = 0;
+    this.millSec = 0;
+    this.count = 0;
+    counter.innerText = 0;
+    this.start();
   }
 
   click(e) {
@@ -33,8 +51,10 @@ class Game {
     ) {
       this.play();
     } else {
-      this.board.renderWrongTile(this.ctx, e.offsetX, e.offsetY);
+      this.ctx.canvas.removeEventListener("mousedown", this.boundClickHandler);
       this.gameOver = true;
+      this.board.renderWrongTile(this.ctx, e.offsetX, e.offsetY);
+      this.count = 0;
     }
   }
 
@@ -51,7 +71,7 @@ class Game {
     this.animateGrid();
     this.updateGrid();
     this.renderTime();
-    if (!this.gameOver) {
+    if (!this.gameOver && !this.board.move) {
       requestAnimationFrame(this.animate.bind(this));
     }
   }

@@ -58,11 +58,9 @@ class Game {
     ) {
       this.play();
     } else {
-      this.ctx.canvas.removeEventListener("mousedown", this.boundClickHandler);
       this.board.renderWrongTile(this.ctx, e.offsetX, e.offsetY);
       this.gameOver = true;
       this.startTimer = false;
-      this.count = 0;
     }
   }
 
@@ -86,6 +84,7 @@ class Game {
       requestAnimationFrame(this.animate.bind(this));
     } else {
       this.drawGameOver();
+      this.ctx.canvas.removeEventListener("mousedown", this.boundClickHandler);
     }
   }
 
@@ -113,7 +112,7 @@ class Game {
     if (this.startTimer) {
       if (!dt) return;
       this.totalSec -= dt;
-      timer.textContent = this.totalSec;
+      timer.textContent = this.totalSec / 1000 + "''";
     }
 
     if (this.totalSec <= 0) {
@@ -129,7 +128,7 @@ class Game {
     this.totalSec = 6000;
     this.millSec = 999;
     this.startTimer = false;
-    timer.textContent = this.totalSec + "." + "000" + "''";
+    timer.textContent = this.totalSec / 1000 + "." + "000" + "''";
   }
 
   resetCounter() {

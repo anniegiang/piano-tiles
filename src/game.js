@@ -25,9 +25,11 @@ class Game {
     this.boundClickHandler = this.click.bind(this);
     this.boundkeyPressHandler = this.keyPress.bind(this);
     this.boundRestartHandler = this.restart.bind(this);
+    this.boundSpaceBarHandler = this.spaceBar.bind(this);
 
     this.ctx.canvas.addEventListener("mousedown", this.boundClickHandler);
     document.addEventListener("keydown", this.boundkeyPressHandler);
+    document.addEventListener("keydown", this.boundSpaceBarHandler);
     playBtn.addEventListener("click", this.boundRestartHandler);
   }
 
@@ -38,6 +40,12 @@ class Game {
     this.resetTimer();
     this.resetCounter();
     this.start();
+  }
+
+  spaceBar(e) {
+    if (e.keyCode === 32) {
+      this.restart();
+    }
   }
 
   keyPress(e) {

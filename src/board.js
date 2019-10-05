@@ -3,7 +3,7 @@ import Tile from "./tile";
 const CONST = {
   WIDTH: 100,
   HEIGHT: 150,
-  VELOCITY: 1,
+  VELOCITY: 20,
   KEYS: [68, 70, 74, 75]
 };
 
@@ -54,20 +54,14 @@ class Board {
   }
 
   moveRows() {
-    this.movement += CONST.VELOCITY;
-    if (this.movement >= CONST.HEIGHT) {
-      this.move = false;
-      this.movement = 0;
-      this.grid.pop();
-    } else {
-      for (let row of this.grid) {
-        for (let tile of row) {
-          tile.y += CONST.VELOCITY;
-          // debugger;
-        }
+    for (let row of this.grid) {
+      for (let tile of row) {
+        tile.y += CONST.HEIGHT;
       }
     }
-    // this.grid.unshift(this.createRow());
+    this.move = !this.move;
+    this.grid.unshift(this.createRow());
+    this.grid.pop();
   }
 
   getTargetRow() {
@@ -165,10 +159,12 @@ class Board {
   }
 
   renderWrongKeyPress(ctx, keyCode) {
-    let res = this.getPressedTile(keyCode);
-    let { tile, tileIdx } = res;
-    let newTile = new Tile(tile.x, tile.y, -1);
-    this.replaceTile(newTile, tileIdx);
+    if (CONST.KEYS.includes(keyCode)) {
+      let res = this.getPressedTile(keyCode);
+      let { tile, tileIdx } = res;
+      let newTile = new Tile(tile.x, tile.y, -1);
+      this.replaceTile(newTile, tileIdx);
+    }
   }
 
   replaceTile(newTile, tileIdx) {

@@ -128,6 +128,19 @@ class Board {
     return res;
   }
 
+  getPressedTile(keyCode) {
+    let targetRow = this.getTargetRow();
+    let res = {};
+    for (let t = 0; t < targetRow.length; t++) {
+      let tile = targetRow[t];
+      if (tile.key === keyCode) {
+        res.tile = tile;
+        res.tileIdx = t;
+      }
+    }
+    return res;
+  }
+
   validPress(keyCode) {
     let tile = this.currentTargetTile();
     if (keyCode === tile.tile.key) {
@@ -139,6 +152,13 @@ class Board {
   renderWrongTile(ctx, mX, mY) {
     let res = this.getClickedTile(mX, mY);
     let { tileIdx, tile } = res;
+    let newTile = new Tile(tile.x, tile.y, -1);
+    this.replaceTile(newTile, tileIdx);
+  }
+
+  renderWrongKeyPress(ctx, keyCode) {
+    let res = this.getPressedTile(keyCode);
+    let { tile, tileIdx } = res;
     let newTile = new Tile(tile.x, tile.y, -1);
     this.replaceTile(newTile, tileIdx);
   }

@@ -33,6 +33,7 @@ class Game {
 
   restart() {
     this.ctx.canvas.addEventListener("mousedown", this.boundClickHandler);
+    document.addEventListener("keydown", this.boundkeyPressHandler);
     this.gameOver = false;
     this.resetTimer();
     this.resetCounter();
@@ -43,11 +44,9 @@ class Game {
     if (!this.gameOver && this.board.validPress(e.keyCode)) {
       this.play();
     } else {
-      this.ctx.canvas.removeEventListener("mousedown", this.boundClickHandler);
-      this.board.renderWrongTile(this.ctx, e.offsetX, e.offsetY);
+      this.board.renderWrongKeyPress(this.ctx, e.keyCode);
       this.gameOver = true;
       this.startTimer = false;
-      this.count = 0;
     }
   }
 
@@ -85,6 +84,7 @@ class Game {
     } else {
       this.drawGameOver();
       this.ctx.canvas.removeEventListener("mousedown", this.boundClickHandler);
+      document.removeEventListener("keydown", this.boundkeyPressHandler);
     }
   }
 

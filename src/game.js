@@ -117,7 +117,7 @@ class Game {
 
     if (this.totalSec <= 0) {
       this.totalSec = 6000;
-      timer.textContent = 0;
+      timer.textContent = 0 + "." + "000" + "''";
       this.gameOver = true;
       this.startTimer = false;
     }
@@ -138,10 +138,11 @@ class Game {
   }
 
   drawGameOver() {
-    this.ctx.font = "40px Arial";
+    this.ctx.font = "40px Tahoma";
     this.ctx.fillStyle = "rgba(255, 0, 40, 0.7)";
     this.ctx.textAlign = "center";
     this.ctx.fillText("GAME OVER", 200, 280);
+    this.ctx.fillText(`Tiles: ${this.count}`, 200, 350);
   }
 }
 

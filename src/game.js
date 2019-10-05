@@ -52,7 +52,9 @@ class Game {
     if (!this.gameOver && this.board.validPress(e.keyCode)) {
       this.play();
     } else {
-      this.board.renderWrongKeyPress(this.ctx, e.keyCode);
+      if (e.keyCode !== 32) {
+        this.board.renderWrongKeyPress(this.ctx, e.keyCode);
+      }
       this.gameOver = true;
       this.startTimer = false;
     }
@@ -72,6 +74,7 @@ class Game {
   }
 
   play() {
+    this.gameOver = false;
     this.board.move = !this.board.move;
     this.startTimer = true;
     this.startCount = true;
@@ -87,7 +90,7 @@ class Game {
     this.animateGrid();
     this.updateGrid();
     this.renderTime(dt);
-    if (!this.gameOver && !this.board.move) {
+    if (!this.gameOver) {
       requestAnimationFrame(this.animate.bind(this));
     } else {
       this.drawGameOver();

@@ -3,7 +3,7 @@ import Tile from "./tile";
 const CONST = {
   WIDTH: 100,
   HEIGHT: 150,
-  VELOCITY: 150,
+  VELOCITY: 1,
   KEYS: [68, 70, 74, 75]
 };
 
@@ -14,6 +14,8 @@ class Board {
     this.dimentions = dimentions;
     this.rows = rows;
     this.columns = columns;
+    this.movement = 0;
+    this.play = true;
     this.move = false;
     this.grid = []; // 2d array, target row = last el in arr
 
@@ -52,14 +54,20 @@ class Board {
   }
 
   moveRows() {
-    for (let row of this.grid) {
-      for (let tile of row) {
-        tile.y += CONST.HEIGHT;
+    this.movement += CONST.VELOCITY;
+    if (this.movement >= CONST.HEIGHT) {
+      this.move = false;
+      this.movement = 0;
+      this.grid.pop();
+    } else {
+      for (let row of this.grid) {
+        for (let tile of row) {
+          tile.y += CONST.VELOCITY;
+          // debugger;
+        }
       }
     }
-    this.move = !this.move;
-    this.grid.unshift(this.createRow());
-    this.grid.pop();
+    // this.grid.unshift(this.createRow());
   }
 
   getTargetRow() {

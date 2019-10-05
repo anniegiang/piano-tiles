@@ -5,6 +5,8 @@
   -1 = wrong (black)
 */
 
+
+
 const COLORS = {
   target: "rgba(3, 250, 252, 0.9)",
   normal: "rgba(0, 0, 100, 0.7)",
@@ -18,10 +20,11 @@ const CONST = {
 };
 
 class Tile {
-  constructor(x, y, color) {
+  constructor(x, y, color, key) {
     this.x = x;
     this.y = y;
     this.color = color;
+    this.key = key;
   }
 
   drawTile(ctx) {

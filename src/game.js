@@ -25,9 +25,11 @@ class Game {
     const playBtn = document.querySelector("#play-btn");
 
     this.boundClickHandler = this.click.bind(this);
+    this.boundkeyPressHandler = this.keyPress.bind(this);
     this.boundRestartHandler = this.restart.bind(this);
 
     this.ctx.canvas.addEventListener("mousedown", this.boundClickHandler);
+    document.addEventListener("keydown", this.boundkeyPressHandler);
     playBtn.addEventListener("click", this.boundRestartHandler);
   }
 
@@ -36,8 +38,19 @@ class Game {
     this.gameOver = false;
     this.resetTimer();
     this.resetCounter();
-
     this.start();
+  }
+
+  keyPress(e) {
+    if (!this.gameOver && this.board.validPress(e.keyCode)) {
+      this.play();
+    } else {
+      this.ctx.canvas.removeEventListener("mousedown", this.boundClickHandler);
+      this.board.renderWrongTile(this.ctx, e.offsetX, e.offsetY);
+      this.gameOver = true;
+      this.startTimer = false;
+      this.count = 0;
+    }
   }
 
   click(e) {

@@ -3,8 +3,11 @@ import Tile from "./tile";
 const CONST = {
   WIDTH: 100,
   HEIGHT: 150,
-  VELOCITY: 150
+  VELOCITY: 150,
+  KEYS: [68, 70, 74, 75]
 };
+
+// d = 68 f = 70 j = 74 k = 75
 
 class Board {
   constructor(dimentions, rows, columns) {
@@ -31,9 +34,9 @@ class Board {
       tY = r * CONST.HEIGHT; // calculate y position given r
 
       if (targetIdx === i) {
-        tile = new Tile(tX, tY, 1); //  target color = 1
+        tile = new Tile(tX, tY, 1, CONST.KEYS[i]); //  target color = 1
       } else {
-        tile = new Tile(tX, tY, 0);
+        tile = new Tile(tX, tY, 0, CONST.KEYS[i]);
       }
       row.push(tile);
     }
@@ -71,6 +74,12 @@ class Board {
         return res;
       }
     }
+  }
+
+  currentTargetTile() {
+    let res = this.currentTargetPosition();
+    let tile = this.getClickedTile(res.targetX, res.targetY);
+    return tile;
   }
 
   validTargetBoundary() {
@@ -117,6 +126,14 @@ class Board {
       }
     }
     return res;
+  }
+
+  validPress(keyCode) {
+    let tile = this.currentTargetTile();
+    if (keyCode === tile.tile.key) {
+      return true;
+    }
+    return false;
   }
 
   renderWrongTile(ctx, mX, mY) {

@@ -1,5 +1,3 @@
-// Controller
-
 import Board from "./board";
 
 class Game {
@@ -86,6 +84,8 @@ class Game {
     this.renderTime(dt);
     if (!this.gameOver && !this.board.move) {
       requestAnimationFrame(this.animate.bind(this));
+    } else {
+      this.drawGameOver();
     }
   }
 
@@ -109,35 +109,19 @@ class Game {
 
   renderTime(dt) {
     const timer = document.querySelector("#timer");
-    // console.log(dt);
 
     if (this.startTimer) {
-      // this.endSec = ts + this.totalSec;
       if (!dt) return;
       this.totalSec -= dt;
       timer.textContent = this.totalSec;
     }
-    // } else {
-    //   if (ts >= this.endSec) {
-    //     // this.startTimer = true;
-    //     this.gameOver = true;
-    //   }
-    // }
 
-    // this.timer = this.endSec - ts;
-
-    // timer.textContent = this.second + "." + this.millSec-- + "''";
-    //   if (!ts) return;
-    //   this.second = this.second - ts;
     if (this.totalSec <= 0) {
       this.totalSec = 6000;
       timer.textContent = 0;
       this.gameOver = true;
       this.startTimer = false;
     }
-    // } else {
-    //   this.gameOver = false;
-    // }
   }
 
   resetTimer() {
@@ -152,6 +136,13 @@ class Game {
     this.startCount = false;
     this.count = 0;
     counter.innerText = 0;
+  }
+
+  drawGameOver() {
+    this.ctx.font = "40px Arial";
+    this.ctx.fillStyle = "rgba(255, 0, 40, 0.7)";
+    this.ctx.textAlign = "center";
+    this.ctx.fillText("GAME OVER", 200, 280);
   }
 }
 

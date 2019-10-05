@@ -20,7 +20,8 @@ class Game {
   }
 
   registerEvents() {
-    const playBtn = document.querySelector("#play-btn");
+    const zen = document.querySelector("#zen");
+    const classic = document.querySelector("#classic");
 
     this.boundClickHandler = this.click.bind(this);
     this.boundkeyPressHandler = this.keyPress.bind(this);
@@ -30,10 +31,33 @@ class Game {
     this.ctx.canvas.addEventListener("mousedown", this.boundClickHandler);
     document.addEventListener("keydown", this.boundkeyPressHandler);
     document.addEventListener("keydown", this.boundSpaceBarHandler);
-    playBtn.addEventListener("click", this.boundRestartHandler);
+    zen.addEventListener("click", () => this.boundRestartHandler("zen"));
+    classic.addEventListener("click", () =>
+      this.boundRestartHandler("classic")
+    );
   }
 
-  restart() {
+  animate() {
+    let dt = Date.now() - this.lastTime;
+    this.lastTime = Date.now();
+    this.ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    this.updateGrid();
+    this.animateGrid();
+    this.renderTime(dt);
+
+    if (!this.gameOver) {
+      requestAnimationFrame(this.animate.bind(this));
+    } else {
+      this.drawGameOver();
+      this.ctx.canvas.removeEventListener("mousedown", this.boundClickHandler);
+      document.removeEventListener("keydown", this.boundkeyPressHandler);
+    }
+  }
+
+  classic() {}
+
+  restart(mode) {
+    this.mode = mode;
     this.ctx.canvas.addEventListener("mousedown", this.boundClickHandler);
     document.addEventListener("keydown", this.boundkeyPressHandler);
     this.gameOver = false;
@@ -44,7 +68,7 @@ class Game {
 
   spaceBar(e) {
     if (e.keyCode === 32) {
-      this.restart();
+      this.restart("zen");
     }
   }
 
@@ -81,26 +105,11 @@ class Game {
     this.animate();
   }
 
-  animate() {
-    let dt = Date.now() - this.lastTime;
-    this.lastTime = Date.now();
-    this.ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-    this.updateGrid();
-    this.animateGrid();
-    this.renderTime(dt);
-
-    if (!this.gameOver) {
-      requestAnimationFrame(this.animate.bind(this));
-    } else {
-      this.drawGameOver();
-      this.ctx.canvas.removeEventListener("mousedown", this.boundClickHandler);
-      document.removeEventListener("keydown", this.boundkeyPressHandler);
-    }
-  }
-
   updateGrid() {
-    if (this.board.move) {
-      this.board.moveRows();
+    if (this.board.move && this.mode === "zen") {
+      this.board.zenMoveRows();
+    } else if (this.board.move && this.mode === "classic") {
+      this.board.classicMoveRows();
     }
   }
 

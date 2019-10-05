@@ -4,10 +4,8 @@ const CONST = {
   WIDTH: 100,
   HEIGHT: 150,
   VELOCITY: 20,
-  KEYS: [68, 70, 74, 75]
+  KEYS: [68, 70, 74, 75] // d = 68 f = 70 j = 74 k = 75
 };
-
-// d = 68 f = 70 j = 74 k = 75
 
 class Board {
   constructor(dimentions, rows, columns) {
@@ -17,6 +15,7 @@ class Board {
     this.movement = 0;
     this.play = true;
     this.move = false;
+    this.classic = 0;
     this.grid = []; // 2d array, target row = last el in arr
 
     // initialize rows to display at the start
@@ -53,7 +52,7 @@ class Board {
     });
   }
 
-  moveRows() {
+  zenMoveRows() {
     for (let row of this.grid) {
       for (let tile of row) {
         tile.y += CONST.HEIGHT;
@@ -61,6 +60,20 @@ class Board {
     }
     this.move = !this.move;
     this.grid.unshift(this.createRow());
+    this.grid.pop();
+  }
+
+  classicMoveRows() {
+    for (let row of this.grid) {
+      for (let tile of row) {
+        tile.y += CONST.HEIGHT;
+      }
+    }
+    this.move = !this.move;
+    if (this.classic < 21) {
+      this.grid.unshift(this.createRow());
+      this.classic++;
+    }
     this.grid.pop();
   }
 

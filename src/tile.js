@@ -1,10 +1,3 @@
-// Model
-/*
-  1 = target (yellow)
-  0 = non-target (pink)
-  -1 = wrong (black)
-*/
-
 const COLORS = {
   target: "rgba(3, 250, 252, 0.9)",
   normal: "rgba(0, 0, 100, 0.7)",

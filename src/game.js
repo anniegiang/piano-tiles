@@ -7,11 +7,11 @@ class Game {
     this.ctx = canvas.getContext("2d");
     this.dimentions = { width: canvas.width, height: canvas.height };
     this.gameOver = false;
-    this.startTimer = false;
-    this.startCount = false;
-    this.count = 0;
-    this.second = 0;
-    this.millSec = 0;
+    this.totalSec = 6000;
+    this.endSec = 0;
+    this.timer = 0;
+    this.resetCounter();
+    this.resetTimer();
     this.registerEvents();
     this.start();
   }
@@ -33,14 +33,10 @@ class Game {
 
   restart() {
     this.ctx.canvas.addEventListener("mousedown", this.boundClickHandler);
-    const counter = document.querySelector("#counter");
     this.gameOver = false;
-    this.startTimer = false;
-    this.startCount = false;
-    this.second = 0;
-    this.millSec = 0;
-    this.count = 0;
-    counter.innerText = 0;
+    this.resetTimer();
+    this.resetCounter();
+
     this.start();
   }
 
@@ -52,8 +48,9 @@ class Game {
       this.play();
     } else {
       this.ctx.canvas.removeEventListener("mousedown", this.boundClickHandler);
-      this.gameOver = true;
       this.board.renderWrongTile(this.ctx, e.offsetX, e.offsetY);
+      this.gameOver = true;
+      this.startTimer = false;
       this.count = 0;
     }
   }
@@ -62,15 +59,18 @@ class Game {
     this.board.move = !this.board.move;
     this.startTimer = true;
     this.startCount = true;
+    this.lastTime = Date.now();
     this.renderCount();
     this.animate();
   }
 
   animate() {
+    let dt = Date.now() - this.lastTime;
+    this.lastTime = Date.now();
     this.ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
     this.animateGrid();
     this.updateGrid();
-    this.renderTime();
+    this.renderTime(dt);
     if (!this.gameOver && !this.board.move) {
       requestAnimationFrame(this.animate.bind(this));
     }
@@ -94,17 +94,51 @@ class Game {
     }
   }
 
-  renderTime() {
+  renderTime(dt) {
     const timer = document.querySelector("#timer");
+    // console.log(dt);
+
     if (this.startTimer) {
-      timer.textContent = this.second + "." + this.millSec++ + "''";
-      if (this.millSec >= 1000) {
-        this.millSec = 0;
-        this.second++;
-      }
-    } else {
-      timer.textContent = this.second + "." + "000" + "''";
+      // this.endSec = ts + this.totalSec;
+      if (!dt) return;
+      this.totalSec -= dt;
+      timer.textContent = this.totalSec;
     }
+    // } else {
+    //   if (ts >= this.endSec) {
+    //     // this.startTimer = true;
+    //     this.gameOver = true;
+    //   }
+    // }
+
+    // this.timer = this.endSec - ts;
+
+    // timer.textContent = this.second + "." + this.millSec-- + "''";
+    //   if (!ts) return;
+    //   this.second = this.second - ts;
+    if (this.totalSec <= 0) {
+      this.totalSec = 6000;
+      timer.textContent = 0;
+      this.gameOver = true;
+      this.startTimer = false;
+    }
+    // } else {
+    //   this.gameOver = false;
+    // }
+  }
+
+  resetTimer() {
+    const timer = document.querySelector("#timer");
+    this.totalSec = 6000;
+    this.millSec = 999;
+    this.startTimer = false;
+    timer.textContent = this.totalSec + "." + "000" + "''";
+  }
+
+  resetCounter() {
+    this.startCount = false;
+    this.count = 0;
+    counter.innerText = 0;
   }
 }
 

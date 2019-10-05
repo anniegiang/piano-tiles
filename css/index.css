@@ -14,7 +14,7 @@ body {
 }
 
 #piano-tiles {
-  border: 7px solid rgba(100, 0, 255, 0.7);
+  border: 7px solid rgba(100, 0, 255, 0.5);
   border-radius: 20px;
   margin-left: 39%;
   margin-top: 1%;
@@ -23,4 +23,28 @@ body {
 #title,
 h1 {
   text-align: center;
+}
+
+#play-btn {
+  background-color: rgba(100, 0, 255, 0.5);
+  border: none;
+  padding: 10px 30px;
+  width: 15%;
+  color: white;
+  font-size: 24px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 4px;
+  position: absolute;
+  bottom: 50;
+  left: 5;
+}
+
+#play-btn:focus {
+  outline: 0;
+}
+
+#play-btn:hover {
+  color: rgba(0, 255, 255, 1);
+  box-shadow: 0 5px 15px rgba(145, 92, 182, 0.4);
 }

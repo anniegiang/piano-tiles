@@ -140,6 +140,10 @@ class Game {
     if (this.startTimer) {
       if (!dt) return;
       this.totalSec -= dt;
+
+      if (this.totalSec <= this.totalSec / 2) {
+        timer.style.color = "red";
+      }
       timer.textContent = this.totalSec / 1000 + "''";
     }
 
@@ -156,7 +160,8 @@ class Game {
 
     if (this.startTimer) {
       if (!dt) return;
-      this.totalSec += dt;
+      this.totalSec += dt + 1;
+
       timer.textContent = this.totalSec / 1000 + "''";
     }
 
@@ -170,7 +175,7 @@ class Game {
 
   resetTimer() {
     const timer = document.querySelector("#timer");
-
+    timer.style.color = " rgba(200, 255, 255, 0.9)";
     this.startTimer = false;
     if (this.mode === "zen") {
       this.totalSec = 7000;
@@ -228,6 +233,8 @@ class Game {
   }
 
   drawGameOver() {
+    const timer = document.querySelector("#timer");
+    timer.style.color = "yellow";
     // background
     this.ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
     this.ctx.fillRect(0, 0, this.dimentions.width, this.dimentions.height);

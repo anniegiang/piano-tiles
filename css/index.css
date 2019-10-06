@@ -66,11 +66,6 @@ button:hover {
   background-color: rgba(145, 92, 182, 0.4);
 }
 
-.info {
-  display: flex;
-  flex-direction: column;
-}
-
 #counter {
   color: rgba(0, 255, 255, 0.9);
   font-size: 35px;
@@ -79,4 +74,20 @@ button:hover {
 #timer {
   color: rgba(200, 255, 255, 0.9);
   font-size: 30px;
+}
+
+.about {
+  display: flex;
+  justify-content: flex-end;
+  align-content: space-between;
+}
+
+.about a {
+  color: white;
+  text-decoration: none;
+  margin-top: 10px;
+  margin-right: 10px;
+  padding: 5px 5px;
+  background-color: rgba(0, 0, 100, 0.7);
+  border-radius: 4px;
 }

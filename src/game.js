@@ -8,6 +8,7 @@ class Game {
     this.totalSec = 6000;
     this.endSec = 0;
     this.timer = 0;
+    this.start = true;
     this.resetCounter();
     this.resetTimer();
     this.registerEvents();
@@ -39,6 +40,10 @@ class Game {
     this.updateGrid();
     this.animateGrid();
 
+    if (this.start) {
+      this.drawStart();
+    }
+
     if (this.mode === "zen") {
       this.renderCountdown(dt);
     } else if (this.mode === "classic") {
@@ -55,18 +60,19 @@ class Game {
   }
 
   restart(mode) {
-    this.mode = mode;
     this.ctx.canvas.addEventListener("mousedown", this.boundClickHandler);
     document.addEventListener("keydown", this.boundkeyPressHandler);
+    this.board = new Board(this.dimentions, 4, 4);
+    this.mode = mode;
     this.gameOver = false;
     this.resetTimer();
     this.resetCounter();
-    this.board = new Board(this.dimentions, 4, 4);
     this.animate();
   }
 
   spaceBar(e) {
     if (e.keyCode === 32) {
+      this.start = false;
       this.restart(this.mode);
     }
   }
@@ -183,6 +189,42 @@ class Game {
       this.count = 0;
     }
     counter.innerText = this.count;
+  }
+
+  drawStart() {
+    // background
+    this.ctx.fillStyle = "rgba(0, 0, 0, 0.8)";
+    this.ctx.fillRect(0, 0, this.dimentions.width, this.dimentions.height);
+    this.ctx.font = "30px Verdana";
+
+    // title
+    this.ctx.fillStyle = "rgba(200, 255, 255, 0.9)";
+    this.ctx.textAlign = "center";
+    this.ctx.fillText(`${this.mode.toUpperCase()}`, 200, 210);
+
+    // mode instructions
+    this.ctx.fillStyle = "rgba(0, 255, 255, 0.9)";
+    this.ctx.font = "20px Verdana";
+    if (this.mode === "zen") {
+      this.ctx.fillText("Get tiles within 7 seconds!", 200, 260);
+    } else if (this.mode === "classic") {
+      this.ctx.fillText("Get 25 tiles as fast as you can!", 200, 260);
+    }
+
+    //  how to play
+    this.ctx.fillStyle = "rgba(200, 255, 255, 0.9)";
+    this.ctx.font = "17px Tahoma";
+    this.ctx.fillText(
+      " ‣ Play by keypress (d f j k) or by clicking.",
+      200,
+      300
+    );
+    this.ctx.font = "17px Tahoma";
+    this.ctx.fillText("‣ A valid tile is in the last row.", 200, 340);
+    this.ctx.font = "15px Tahoma";
+
+    // space bar
+    this.ctx.fillText("Press the spacebar to start.", 200, 380);
   }
 
   drawGameOver() {

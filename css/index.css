@@ -88,6 +88,6 @@ button:hover {
   margin-top: 10px;
   margin-right: 10px;
   padding: 5px 5px;
-  background-color: rgba(0, 0, 100, 0.7);
+  background-color: rgba(100, 0, 255, 0.5);
   border-radius: 4px;
 }

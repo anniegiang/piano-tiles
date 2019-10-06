@@ -27,7 +27,7 @@ h2 {
   display: block;
 }
 
-#play-btn {
+button {
   background-color: rgba(100, 0, 255, 0.5);
   border: none;
   padding: 10px 30px;
@@ -40,15 +40,43 @@ h2 {
   position: absolute;
   bottom: 50;
   left: 5;
-  margin-top: 2%;
-  margin-left: 43%;
 }
 
-#play-btn:focus {
+button:focus {
   outline: 0;
 }
 
-#play-btn:hover {
+button:hover {
   color: rgba(0, 255, 255, 1);
   box-shadow: 0 5px 15px rgba(145, 92, 182, 0.4);
+}
+
+#classic {
+  margin-top: 2%;
+  margin-left: 70%;
+}
+
+#zen {
+  margin-top: 6%;
+  margin-left: 70%;
+}
+
+#classic:focus,
+#zen:focus {
+  background-color: rgba(145, 92, 182, 0.4);
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+#counter {
+  color: rgba(0, 255, 255, 0.9);
+  font-size: 35px;
+}
+
+#timer {
+  color: rgba(200, 255, 255, 0.9);
+  font-size: 30px;
 }

@@ -172,12 +172,10 @@ class Board {
   }
 
   renderWrongKeyPress(ctx, keyCode) {
-    if (CONST.KEYS.includes(keyCode)) {
-      let res = this.getPressedTile(keyCode);
-      let { tile, tileIdx } = res;
-      let newTile = new Tile(tile.x, tile.y, -1);
-      this.replaceTile(newTile, tileIdx);
-    }
+    let res = this.getPressedTile(keyCode);
+    let { tile, tileIdx } = res;
+    let newTile = new Tile(tile.x, tile.y, -1);
+    this.replaceTile(newTile, tileIdx);
   }
 
   replaceTile(newTile, tileIdx) {

@@ -120,7 +120,11 @@ class Game {
     const counter = document.querySelector("#counter");
 
     if (this.startCount) {
-      counter.textContent = ++this.count;
+      if (this.mode === "classic") {
+        counter.textContent = --this.count;
+      } else if (this.mode === "zen") {
+        counter.textContent = ++this.count;
+      }
     }
   }
 
@@ -173,32 +177,45 @@ class Game {
 
   resetCounter() {
     this.startCount = false;
-    this.count = 0;
-    counter.innerText = 0;
+    if (this.mode === "classic") {
+      this.count = 25;
+    } else if (this.mode === "zen") {
+      this.count = 0;
+    }
+    counter.innerText = this.count;
   }
 
   drawGameOver() {
+    // background
     this.ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
     this.ctx.fillRect(0, 0, this.dimentions.width, this.dimentions.height);
     this.ctx.font = "30px Verdana";
 
-    this.ctx.fillStyle = "rgba(0, 255, 40, 0.9)";
+    // title
+    this.ctx.fillStyle = "rgba(200, 255, 255, 0.9)";
     this.ctx.textAlign = "center";
-    this.ctx.fillText("GAME OVER", 200, 270);
 
+    if (this.board.grid.length === 0) {
+      this.ctx.fillText("Nice!", 200, 250);
+    } else {
+      this.ctx.fillText("GAME OVER", 200, 250);
+    }
+
+    // score
+    this.ctx.fillStyle = "rgba(0, 255, 255, 0.9)";
     if (this.mode === "zen") {
       this.ctx.font = "35px Verdana";
-      this.ctx.fillText(`Tiles: ${this.count}`, 200, 330);
+      this.ctx.fillText(`${this.count}`, 200, 310);
     } else if (this.mode === "classic") {
       const timer = document.querySelector("#timer");
       this.ctx.font = "35px Verdana";
-      this.ctx.fillStyle = "rgba(255, 255, 40, 0.9)";
-      this.ctx.fillText(`Time: ${timer.textContent}`, 200, 330);
+      this.ctx.fillText(`${timer.textContent}`, 200, 310);
     }
 
+    // restart
+    this.ctx.fillStyle = "rgba(200, 255, 255, 0.9)";
     this.ctx.font = "20px Tahoma";
-    this.ctx.fillStyle = "rgba(255, 255, 40, 0.9)";
-    this.ctx.fillText("Press the spacebar to restart!", 200, 380);
+    this.ctx.fillText("Press the spacebar to restart", 200, 360);
   }
 }
 

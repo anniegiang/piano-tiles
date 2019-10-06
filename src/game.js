@@ -11,12 +11,7 @@ class Game {
     this.resetCounter();
     this.resetTimer();
     this.registerEvents();
-    this.start();
-  }
-
-  start() {
-    this.board = new Board(this.dimentions, 4, 4);
-    this.animate();
+    this.restart("classic");
   }
 
   registerEvents() {
@@ -66,12 +61,13 @@ class Game {
     this.gameOver = false;
     this.resetTimer();
     this.resetCounter();
-    this.start();
+    this.board = new Board(this.dimentions, 4, 4);
+    this.animate();
   }
 
   spaceBar(e) {
     if (e.keyCode === 32) {
-      this.restart("zen");
+      this.restart(this.mode);
     }
   }
 
@@ -182,11 +178,27 @@ class Game {
   }
 
   drawGameOver() {
-    this.ctx.font = "40px Tahoma";
-    this.ctx.fillStyle = "rgba(255, 0, 40, 0.7)";
+    this.ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
+    this.ctx.fillRect(0, 0, this.dimentions.width, this.dimentions.height);
+    this.ctx.font = "30px Verdana";
+
+    this.ctx.fillStyle = "rgba(0, 255, 40, 0.9)";
     this.ctx.textAlign = "center";
-    this.ctx.fillText("GAME OVER", 200, 280);
-    this.ctx.fillText(`Tiles: ${this.count}`, 200, 350);
+    this.ctx.fillText("GAME OVER", 200, 270);
+
+    if (this.mode === "zen") {
+      this.ctx.font = "35px Verdana";
+      this.ctx.fillText(`Tiles: ${this.count}`, 200, 330);
+    } else if (this.mode === "classic") {
+      const timer = document.querySelector("#timer");
+      this.ctx.font = "35px Verdana";
+      this.ctx.fillStyle = "rgba(255, 255, 40, 0.9)";
+      this.ctx.fillText(`Time: ${timer.textContent}`, 200, 330);
+    }
+
+    this.ctx.font = "20px Tahoma";
+    this.ctx.fillStyle = "rgba(255, 255, 40, 0.9)";
+    this.ctx.fillText("Press the spacebar to restart!", 200, 380);
   }
 }
 

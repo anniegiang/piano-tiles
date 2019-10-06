@@ -43,7 +43,12 @@ class Game {
     this.ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
     this.updateGrid();
     this.animateGrid();
-    this.renderTime(dt);
+
+    if (this.mode === "zen") {
+      this.renderCountdown(dt);
+    } else if (this.mode === "classic") {
+      this.renderTimer(dt);
+    }
 
     if (!this.gameOver) {
       requestAnimationFrame(this.animate.bind(this));
@@ -53,8 +58,6 @@ class Game {
       document.removeEventListener("keydown", this.boundkeyPressHandler);
     }
   }
-
-  classic() {}
 
   restart(mode) {
     this.mode = mode;
@@ -125,7 +128,7 @@ class Game {
     }
   }
 
-  renderTime(dt) {
+  renderCountdown(dt) {
     const timer = document.querySelector("#timer");
 
     if (this.startTimer) {
@@ -142,12 +145,34 @@ class Game {
     }
   }
 
+  renderTimer(dt) {
+    const timer = document.querySelector("#timer");
+
+    if (this.startTimer) {
+      if (!dt) return;
+      this.totalSec += dt;
+      timer.textContent = this.totalSec / 1000 + "''";
+    }
+
+    if (this.board.grid.length === 0) {
+      // this.totalSec = 6000;
+      this.gameOver = true;
+      this.startTimer = false;
+      timer.textContent = this.totalSec / 1000 + "''";
+    }
+  }
+
   resetTimer() {
     const timer = document.querySelector("#timer");
-    this.totalSec = 6000;
-    this.millSec = 999;
+
     this.startTimer = false;
-    timer.textContent = this.totalSec / 1000 + "." + "000" + "''";
+    if (this.mode === "zen") {
+      this.totalSec = 7000;
+      timer.textContent = this.totalSec / 1000 + "." + "000" + "''";
+    } else {
+      this.totalSec = 0;
+      timer.textContent = 0 + "." + "000" + "''";
+    }
   }
 
   resetCounter() {

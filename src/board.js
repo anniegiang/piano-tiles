@@ -70,11 +70,11 @@ class Board {
       }
     }
     this.move = !this.move;
+    this.grid.pop();
     if (this.classic < 21) {
       this.grid.unshift(this.createRow());
       this.classic++;
     }
-    this.grid.pop();
   }
 
   getTargetRow() {

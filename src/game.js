@@ -29,11 +29,11 @@ class Game {
     this.boundRestartHandler = this.restart.bind(this);
     this.boundSpaceBarHandler = this.spaceBar.bind(this);
 
+    audio.addEventListener("click", this.boundToggleMusicEventHandler);
+    mute.addEventListener("click", this.boundToggleMusicEventHandler);
     this.ctx.canvas.addEventListener("mousedown", this.boundClickHandler);
     document.addEventListener("keydown", this.boundkeyPressHandler);
     document.addEventListener("keydown", this.boundSpaceBarHandler);
-    audio.addEventListener("click", this.boundToggleMusicEventHandler);
-    mute.addEventListener("click", this.boundToggleMusicEventHandler);
     zen.addEventListener("click", () => this.boundRestartHandler("zen"));
     classic.addEventListener("click", () =>
       this.boundRestartHandler("classic")

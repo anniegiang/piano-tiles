@@ -79,6 +79,7 @@ class Game {
 
   spaceBar(e) {
     if (e.keyCode === 32) {
+      this.start = false;
       this.restart(this.mode);
     }
   }

@@ -51,13 +51,18 @@ button:hover {
   box-shadow: 0 5px 15px rgba(145, 92, 182, 0.4);
 }
 
+#how-to {
+  margin-top: 1%;
+  margin-left: 70%;
+}
+
 #classic {
-  margin-top: 2%;
+  margin-top: 6%;
   margin-left: 70%;
 }
 
 #zen {
-  margin-top: 6%;
+  margin-top: 11%;
   margin-left: 70%;
 }
 
@@ -94,7 +99,8 @@ button:hover {
 
 .tooltip .tooltiptext {
   visibility: hidden;
-  width: 320px;
+  width: 330px;
+  height: 25px;
   background-color: #555;
   color: #fff;
   text-align: center;
@@ -102,19 +108,27 @@ button:hover {
   border-radius: 6px;
   font-size: 17px;
   text-transform: none;
-  /* Position the tooltip text */
   position: absolute;
   z-index: 1;
   bottom: 125%;
   left: 30%;
-  margin-left: -80px;
+  margin-left: -120px;
 
-  /* Fade in tooltip */
   opacity: 0;
   transition: opacity 0.4s;
 }
 
-/* Tooltip arrow */
+#how-to-tip {
+  width: 470px;
+  height: 70px;
+  margin-left: -180px;
+  list-style-type: none;
+}
+
+#zen-tip {
+  height: 50px;
+}
+
 .tooltip .tooltiptext::after {
   content: "";
   position: absolute;
@@ -126,7 +140,6 @@ button:hover {
   border-color: #555 transparent transparent transparent;
 }
 
-/* Show the tooltip text when you mouse over the tooltip container */
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;

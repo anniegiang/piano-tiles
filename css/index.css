@@ -144,3 +144,17 @@ button:hover {
   visibility: visible;
   opacity: 1;
 }
+
+#audio,
+#mute {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 8%;
+  left: 62%;
+  cursor: pointer;
+}
+
+#mute {
+  display: none;
+}

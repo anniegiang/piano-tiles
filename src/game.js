@@ -1,5 +1,5 @@
 import Board from "./board";
-
+import Music from "./music";
 class Game {
   constructor(canvas) {
     this.ctx = canvas.getContext("2d");
@@ -9,6 +9,8 @@ class Game {
     this.endSec = 0;
     this.timer = 0;
     this.start = true;
+    this.playMusic = true;
+    this.playMusicEvent();
     this.resetCounter();
     this.resetTimer();
     this.registerEvents();
@@ -18,8 +20,11 @@ class Game {
   registerEvents() {
     const zen = document.querySelector("#zen");
     const classic = document.querySelector("#classic");
+    const audio = document.querySelector("#audio");
+    const mute = document.querySelector("#mute");
 
     this.boundClickHandler = this.click.bind(this);
+    this.boundToggleMusicEventHandler = this.toggleMusicEvent.bind(this);
     this.boundkeyPressHandler = this.keyPress.bind(this);
     this.boundRestartHandler = this.restart.bind(this);
     this.boundSpaceBarHandler = this.spaceBar.bind(this);
@@ -27,6 +32,8 @@ class Game {
     this.ctx.canvas.addEventListener("mousedown", this.boundClickHandler);
     document.addEventListener("keydown", this.boundkeyPressHandler);
     document.addEventListener("keydown", this.boundSpaceBarHandler);
+    audio.addEventListener("click", this.boundToggleMusicEventHandler);
+    mute.addEventListener("click", this.boundToggleMusicEventHandler);
     zen.addEventListener("click", () => this.boundRestartHandler("zen"));
     classic.addEventListener("click", () =>
       this.boundRestartHandler("classic")
@@ -72,7 +79,6 @@ class Game {
 
   spaceBar(e) {
     if (e.keyCode === 32) {
-      this.start = false;
       this.restart(this.mode);
     }
   }
@@ -265,6 +271,40 @@ class Game {
     this.ctx.fillStyle = "rgba(200, 255, 255, 0.9)";
     this.ctx.font = "20px Tahoma";
     this.ctx.fillText("Press the spacebar to restart", 200, 360);
+  }
+
+  playMusicEvent() {
+    const audio = document.querySelector("#sound");
+    this.music = new Music(audio, "../assets/music/make-ya-moves.wav");
+
+    if (this.playMusic) {
+      this.music.play();
+    }
+  }
+
+  toggleMusicEvent(e) {
+    let audio = document.querySelector("#sound");
+    let mute = document.querySelector("#mute");
+
+    this.playMusic = !this.playMusic;
+
+    if (this.playMusic) {
+      mute.style.display = "none";
+
+      let promise = this.music.play();
+      if (promise !== undefined) {
+        promise
+          .then(_ => {
+            // Autoplay started!
+          })
+          .catch(error => {
+            console.log("Loading");
+          });
+      }
+    } else {
+      mute.style.display = "block";
+      this.music.stop();
+    }
   }
 }
 

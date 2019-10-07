@@ -1,20 +1,23 @@
-
-class Music(src) {
-  constructor(src) {
-    this.sound = document.createElement("audio");
+class Music {
+  constructor(sound, src) {
+    this.sound = sound;
     this.sound.src = src;
+    this.init();
+  }
+
+  init() {
     this.sound.setAttribute("preload", "auto");
     this.sound.setAttribute("controls", "none");
     this.sound.setAttribute("loop", "true");
     this.sound.style.display = "none";
-    document.body.appendChild(this.sound);
   }
-    play() {
-      this.sound.play();
-    };
-    stop() {
-      this.sound.pause();
-    };
+
+  play() {
+    this.sound.play();
+  }
+  stop() {
+    this.sound.pause();
+  }
 }
 
 export default Music;

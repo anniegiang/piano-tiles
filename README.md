@@ -8,7 +8,7 @@ A single-player game containing two modes where the goal is to tap tiles quickly
 
 ### Features
 - Two game modes (Classic and Zen).
-- Dynamic play functionality using key press or mouse click.
+- Dynamic play functionality using key press (d f j k) and mouse click.
 
 #### Classic Mode
 - Tap 25 tiles in the fastest time.

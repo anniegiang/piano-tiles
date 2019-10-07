@@ -85,25 +85,30 @@ class Game {
   }
 
   keyPress(e) {
-    if (!this.gameOver && this.board.validPress(e.keyCode)) {
+    if (!this.gameOver && !this.start && this.board.validPress(e.keyCode)) {
       this.play();
     } else {
-      this.board.renderWrongKeyPress(this.ctx, e.keyCode);
-      this.gameOver = true;
-      this.startTimer = false;
+      if (!this.start) {
+        this.board.renderWrongKeyPress(this.ctx, e.keyCode);
+        this.gameOver = true;
+        this.startTimer = false;
+      }
     }
   }
 
   click(e) {
     if (
       !this.gameOver &&
-      this.board.isValidTargetBoundary(e.offsetX, e.offsetY)
+      this.board.isValidTargetBoundary(e.offsetX, e.offsetY) &&
+      !this.start
     ) {
       this.play();
     } else {
-      this.board.renderWrongTile(this.ctx, e.offsetX, e.offsetY);
-      this.gameOver = true;
-      this.startTimer = false;
+      if (!this.start) {
+        this.board.renderWrongTile(this.ctx, e.offsetX, e.offsetY);
+        this.gameOver = true;
+        this.startTimer = false;
+      }
     }
   }
 

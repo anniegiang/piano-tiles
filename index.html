@@ -26,8 +26,13 @@
       <h2 id="timer"></h2>
       <h2><span id="counter">0</span></h2>
     </div>
-    <button autofocus id="classic">Classic</button>
-    <button id="zen">Zen</button>
+    <button autofocus class="tooltip" id="classic">
+      Classic
+      <span class="tooltiptext">Tap 25 tiles as fast as you can!</span>
+    </button>
+    <button class="tooltip" id="zen">
+      Zen<span class="tooltiptext">Tap tiles within 7 seconds!</span>
+    </button>
     <canvas id="piano-tiles" height="600" width="400"></canvas>
   </body>
 </html>

@@ -6,7 +6,3 @@ const playBtn = document.querySelector("#play-btn");
 
 let game = new Game(canvas);
 
-const start = () => {
-  game.play.bind(this);
-};
-

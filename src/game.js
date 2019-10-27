@@ -9,7 +9,7 @@ class Game {
     this.endSec = 0;
     this.timer = 0;
     this.start = true;
-    this.bestClassicScore = 0;
+    this.bestClassicScore = Infinity;
     this.playMusic = false;
     this.playMusicEvent();
     this.resetCounter();
@@ -187,11 +187,12 @@ class Game {
       this.startTimer = false;
       const totalTime = this.totalSec / 1000;
       if (totalTime < this.bestClassicScore) {
-        debugger;
+        this.bestClassicScore = totalTime;
+        localStorage.removeItem("score");
         localStorage.setItem("score", totalTime);
+        this.renderClassicScore();
       }
       timer.textContent = this.totalSec / 1000 + "''";
-      this.renderClassicScore();
     }
   }
 
@@ -220,10 +221,8 @@ class Game {
 
   renderClassicScore() {
     let score = localStorage.getItem("score");
-    let scoreEl = document.querySelector(".classic-scores");
-    let h2 = document.createElement("h2");
-    h2.innerText = score + "''";
-    scoreEl.appendChild(h2);
+    let scoreEl = document.querySelector(".classic-score");
+    scoreEl.innerText = score + "''";
   }
 
   drawStart() {

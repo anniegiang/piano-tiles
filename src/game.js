@@ -10,11 +10,13 @@ class Game {
     this.timer = 0;
     this.start = true;
     this.bestClassicScore = Infinity;
+    this.bestZenScore = Infinity;
     this.playMusic = false;
     this.playMusicEvent();
     this.resetCounter();
     this.resetTimer();
     this.renderClassicScore();
+    this.renderZenScore();
     this.registerEvents();
     this.restart("classic");
   }
@@ -188,8 +190,8 @@ class Game {
       const totalTime = this.totalSec / 1000;
       if (totalTime < this.bestClassicScore) {
         this.bestClassicScore = totalTime;
-        localStorage.removeItem("score");
-        localStorage.setItem("score", totalTime);
+        localStorage.removeItem("classicScore");
+        localStorage.setItem("classicScore", totalTime);
         this.renderClassicScore();
       }
       timer.textContent = this.totalSec / 1000 + "''";
@@ -220,8 +222,18 @@ class Game {
   }
 
   renderClassicScore() {
-    let score = localStorage.getItem("score");
+    let score = localStorage.getItem("classicScore");
     let scoreEl = document.querySelector(".classic-score");
+    if (score === null) {
+      scoreEl.innerText = "no best score";
+    } else {
+      scoreEl.innerText = score + "''";
+    }
+  }
+
+  renderZenScore() {
+    let score = localStorage.getItem("score");
+    let scoreEl = document.querySelector(".zen-score");
     scoreEl.innerText = score + "''";
   }
 

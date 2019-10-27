@@ -5,12 +5,12 @@ class Game {
     this.ctx = canvas.getContext("2d");
     this.dimentions = { width: canvas.width, height: canvas.height };
     this.gameOver = false;
-    this.totalSec = 6000;
+    this.totalSec = 7000;
     this.endSec = 0;
     this.timer = 0;
     this.start = true;
     this.bestClassicScore = Infinity;
-    this.bestZenScore = Infinity;
+    this.bestZenScore = 0;
     this.playMusic = false;
     this.playMusicEvent();
     this.resetCounter();
@@ -165,10 +165,17 @@ class Game {
     }
 
     if (this.totalSec <= 0) {
-      this.totalSec = 6000;
-      timer.textContent = 0 + "." + "000" + "''";
       this.gameOver = true;
       this.startTimer = false;
+      this.totalSec = 7000;
+      timer.textContent = 0 + "." + "000" + "''";
+      if (this.count > this.bestZenScore) {
+        debugger;
+        this.bestZenScore = this.count;
+        localStorage.removeItem("zenScore");
+        localStorage.setItem("zenScore", this.count);
+        this.renderZenScore();
+      }
     }
   }
 
@@ -225,16 +232,20 @@ class Game {
     let score = localStorage.getItem("classicScore");
     let scoreEl = document.querySelector(".classic-score");
     if (score === null) {
-      scoreEl.innerText = "no best score";
+      scoreEl.innerText = "no best time";
     } else {
       scoreEl.innerText = score + "''";
     }
   }
 
   renderZenScore() {
-    let score = localStorage.getItem("score");
+    let score = localStorage.getItem("zenScore");
     let scoreEl = document.querySelector(".zen-score");
-    scoreEl.innerText = score + "''";
+    if (score === null) {
+      scoreEl.innerText = "no best score";
+    } else {
+      scoreEl.innerText = score + " tiles";
+    }
   }
 
   drawStart() {

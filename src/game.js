@@ -9,10 +9,12 @@ class Game {
     this.endSec = 0;
     this.timer = 0;
     this.start = true;
-    this.playMusic = true;
+    this.bestClassicScore = 0;
+    this.playMusic = false;
     this.playMusicEvent();
     this.resetCounter();
     this.resetTimer();
+    this.renderClassicScore();
     this.registerEvents();
     this.restart("classic");
   }
@@ -147,6 +149,7 @@ class Game {
   }
 
   renderCountdown(dt) {
+    // Zen timer
     const timer = document.querySelector("#timer");
 
     if (this.startTimer) {
@@ -168,6 +171,7 @@ class Game {
   }
 
   renderTimer(dt) {
+    // Classic timer
     const timer = document.querySelector("#timer");
 
     if (this.startTimer) {
@@ -181,7 +185,13 @@ class Game {
       // this.totalSec = 6000;
       this.gameOver = true;
       this.startTimer = false;
+      const totalTime = this.totalSec / 1000;
+      if (totalTime < this.bestClassicScore) {
+        debugger;
+        localStorage.setItem("score", totalTime);
+      }
       timer.textContent = this.totalSec / 1000 + "''";
+      this.renderClassicScore();
     }
   }
 
@@ -206,6 +216,14 @@ class Game {
       this.count = 0;
     }
     counter.innerText = this.count;
+  }
+
+  renderClassicScore() {
+    let score = localStorage.getItem("score");
+    let scoreEl = document.querySelector(".classic-scores");
+    let h2 = document.createElement("h2");
+    h2.innerText = score + "''";
+    scoreEl.appendChild(h2);
   }
 
   drawStart() {

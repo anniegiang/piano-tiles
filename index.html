@@ -15,6 +15,7 @@
     <title>Piano Tiles</title>
   </head>
   <body>
+    <!-- ABOUT -->
     <div class="about">
       <a target="_blank" href="https://github.com/anniegiang">Github</a>
       <a
@@ -23,13 +24,24 @@
         >Linkedin</a
       >
     </div>
+
+    <!-- TIMER AND COUNTER-->
     <div class="info">
       <h2 id="timer"></h2>
       <h2><span id="counter">0</span></h2>
     </div>
+
+    <!-- AUDIO -->
     <audio id="sound" src=""></audio>
     <img src="./assets/audio.png" alt="audio" id="audio" />
     <img src="./assets/mute.jpg" alt="mute" id="mute" />
+
+    <!-- SCORE -->
+    <h1>Your best Classic Score</h1>
+    <div class="classic-scores"></div>
+    <h1>Zen Scores</h1>
+    <div class="zen-scores"></div>
+    <!-- HOW TO PLAY-->
     <button autofocus class="tooltip" id="how-to">
       How to Play
       <ul class="tooltiptext" id="how-to-tip">
@@ -38,10 +50,14 @@
         <li>Restart anytime by pressing the spacebar.</li>
       </ul>
     </button>
+
+    <!-- CLASSIC -->
     <button autofocus class="tooltip" id="classic">
       Classic
       <span class="tooltiptext">Tap 25 tiles as fast as you can!</span>
     </button>
+
+    <!-- ZEN-->
     <button class="tooltip" id="zen">
       Zen<span class="tooltiptext" id="zen-tip"
         >Tap as many tiles as you can within 7 seconds!</span

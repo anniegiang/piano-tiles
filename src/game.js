@@ -5,14 +5,18 @@ class Game {
     this.ctx = canvas.getContext("2d");
     this.dimentions = { width: canvas.width, height: canvas.height };
     this.gameOver = false;
-    this.totalSec = 6000;
+    this.totalSec = 7000;
     this.endSec = 0;
     this.timer = 0;
     this.start = true;
-    this.playMusic = true;
+    this.bestClassicScore = Infinity;
+    this.bestZenScore = 0;
+    this.playMusic = false;
     this.playMusicEvent();
     this.resetCounter();
     this.resetTimer();
+    this.renderClassicScore();
+    this.renderZenScore();
     this.registerEvents();
     this.restart("classic");
   }
@@ -147,6 +151,7 @@ class Game {
   }
 
   renderCountdown(dt) {
+    // Zen timer
     const timer = document.querySelector("#timer");
 
     if (this.startTimer) {
@@ -160,14 +165,22 @@ class Game {
     }
 
     if (this.totalSec <= 0) {
-      this.totalSec = 6000;
-      timer.textContent = 0 + "." + "000" + "''";
       this.gameOver = true;
       this.startTimer = false;
+      this.totalSec = 7000;
+      timer.textContent = 0 + "." + "000" + "''";
+      if (this.count > this.bestZenScore) {
+        debugger;
+        this.bestZenScore = this.count;
+        localStorage.removeItem("zenScore");
+        localStorage.setItem("zenScore", this.count);
+        this.renderZenScore();
+      }
     }
   }
 
   renderTimer(dt) {
+    // Classic timer
     const timer = document.querySelector("#timer");
 
     if (this.startTimer) {
@@ -181,6 +194,13 @@ class Game {
       // this.totalSec = 6000;
       this.gameOver = true;
       this.startTimer = false;
+      const totalTime = this.totalSec / 1000;
+      if (totalTime < this.bestClassicScore) {
+        this.bestClassicScore = totalTime;
+        localStorage.removeItem("classicScore");
+        localStorage.setItem("classicScore", totalTime);
+        this.renderClassicScore();
+      }
       timer.textContent = this.totalSec / 1000 + "''";
     }
   }
@@ -206,6 +226,26 @@ class Game {
       this.count = 0;
     }
     counter.innerText = this.count;
+  }
+
+  renderClassicScore() {
+    let score = localStorage.getItem("classicScore");
+    let scoreEl = document.querySelector(".classic-score");
+    if (score === null) {
+      scoreEl.innerText = "no best time";
+    } else {
+      scoreEl.innerText = score + "''";
+    }
+  }
+
+  renderZenScore() {
+    let score = localStorage.getItem("zenScore");
+    let scoreEl = document.querySelector(".zen-score");
+    if (score === null) {
+      scoreEl.innerText = "no best score";
+    } else {
+      scoreEl.innerText = score + " tiles";
+    }
   }
 
   drawStart() {

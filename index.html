@@ -15,38 +15,65 @@
     <title>Piano Tiles</title>
   </head>
   <body>
-    <div class="about">
-      <a target="_blank" href="https://github.com/anniegiang">Github</a>
-      <a
-        target="_blank"
-        href="https://www.linkedin.com/in/annie-giang-113bb4101/"
-        >Linkedin</a
-      >
+    <!-- ABOUT -->
+    <div class="app">
+      <div class="about">
+        <a target="_blank" href="https://github.com/anniegiang">Github</a>
+        <a
+          target="_blank"
+          href="https://www.linkedin.com/in/annie-giang-113bb4101/"
+          >Linkedin</a
+        >
+      </div>
+
+      <!-- TIMER AND COUNTER-->
+      <div class="info">
+        <h2 id="timer"></h2>
+        <h2 id="counter"><span id="counter">0</span></h2>
+      </div>
+
+      <!-- AUDIO -->
+      <audio id="sound" src=""></audio>
+      <img src="./assets/audio.png" alt="audio" id="audio" />
+      <img src="./assets/mute.jpg" alt="mute" id="mute" />
+
+      <canvas id="piano-tiles" height="600" width="400"></canvas>
+
+      <!-- Score-->
+      <div class="score">
+        <!-- Classic Score-->
+        <h3 class="score-title">Best Classic time</h3>
+        <h4 class="classic-score"></h4>
+
+        <!-- Zen Score-->
+        <h3 class="score-title">Best Zen score</h3>
+        <h4 class="zen-score"></h4>
+      </div>
+
+      <!-- HOW TO PLAY-->
+      <div class="how-to-play">
+        <button autofocus class="tooltip" id="how-to">
+          How to Play
+          <ul class="tooltiptext" id="how-to-tip">
+            <li>Play using keypress (d f j k) or by clicking.</li>
+            <li>A valid tile is in the last row.</li>
+            <li>Restart anytime by pressing the spacebar.</li>
+          </ul>
+        </button>
+
+        <!-- CLASSIC -->
+        <button autofocus class="tooltip" id="classic">
+          Classic
+          <span class="tooltiptext">Tap 25 tiles as fast as you can!</span>
+        </button>
+
+        <!-- ZEN-->
+        <button class="tooltip" id="zen">
+          Zen<span class="tooltiptext" id="zen-tip"
+            >Tap as many tiles as you can within 7 seconds!</span
+          >
+        </button>
+      </div>
     </div>
-    <div class="info">
-      <h2 id="timer"></h2>
-      <h2><span id="counter">0</span></h2>
-    </div>
-    <audio id="sound" src=""></audio>
-    <img src="./assets/audio.png" alt="audio" id="audio" />
-    <img src="./assets/mute.jpg" alt="mute" id="mute" />
-    <button autofocus class="tooltip" id="how-to">
-      How to Play
-      <ul class="tooltiptext" id="how-to-tip">
-        <li>Play using keypress (d f j k) or by clicking.</li>
-        <li>A valid tile is in the last row.</li>
-        <li>Restart anytime by pressing the spacebar.</li>
-      </ul>
-    </button>
-    <button autofocus class="tooltip" id="classic">
-      Classic
-      <span class="tooltiptext">Tap 25 tiles as fast as you can!</span>
-    </button>
-    <button class="tooltip" id="zen">
-      Zen<span class="tooltiptext" id="zen-tip"
-        >Tap as many tiles as you can within 7 seconds!</span
-      >
-    </button>
-    <canvas id="piano-tiles" height="600" width="400"></canvas>
   </body>
 </html>

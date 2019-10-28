@@ -1,21 +1,21 @@
 html {
-  height: 100%;
+  height: 100vh;
 }
 
 body {
   background-image: url("https://cdn.dribbble.com/users/319473/screenshots/4111136/reinvently_insights_3.0.gif");
   background-repeat: no-repeat, repeat;
   background-size: cover;
-  height: 100%;
+  height: 100vh;
   margin: 0;
   padding: 0;
   color: #fff;
   font-family: Verdana, sans-serif;
 }
 
-#title,
-h2 {
-  text-align: center;
+.app {
+  position: fixed;
+  width: 100vw;
 }
 
 #piano-tiles {
@@ -25,60 +25,6 @@ h2 {
   margin: auto;
   padding: 0;
   display: block;
-}
-
-button {
-  position: fixed;
-  background-color: rgba(100, 0, 255, 0.5);
-  border: none;
-  padding: 10px 30px;
-  width: 15%;
-  color: white;
-  font-size: 24px;
-  text-transform: uppercase;
-  cursor: pointer;
-  border-radius: 4px;
-  bottom: 50;
-  left: 5;
-}
-
-button:focus {
-  outline: 0;
-}
-
-button:hover {
-  color: rgba(0, 255, 255, 1);
-  box-shadow: 0 5px 15px rgba(145, 92, 182, 0.4);
-}
-
-#how-to {
-  margin-top: 1%;
-  margin-left: 70%;
-}
-
-#classic {
-  margin-top: 6%;
-  margin-left: 70%;
-}
-
-#zen {
-  margin-top: 11%;
-  margin-left: 70%;
-}
-
-#classic:focus,
-#zen:focus {
-  background-color: rgba(145, 92, 182, 0.4);
-}
-
-#counter {
-  color: rgba(0, 255, 255, 0.9);
-  font-size: 35px;
-}
-
-#timer {
-  color: rgba(200, 255, 255, 0.9);
-  font-size: 30px;
 }
 
 .about {
@@ -97,6 +43,81 @@ button:hover {
   border-radius: 4px;
 }
 
+#timer,
+#counter {
+  text-align: center;
+}
+
+#counter {
+  color: rgba(0, 255, 255, 0.9);
+  font-size: 35px;
+}
+
+#timer {
+  color: rgba(200, 255, 255, 0.9);
+  font-size: 30px;
+}
+
+.score {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  position: absolute;
+  top: 22%;
+  left: 10%;
+  width: 30%;
+}
+
+.score-title {
+  /* background-color: rgba(100, 0, 255, 0.5); */
+  text-transform: uppercase;
+  font-weight: 100;
+}
+
+.classic-score,
+.zen-score {
+  color: rgba(0, 255, 255, 0.9);
+  font-size: 20px;
+}
+
+.how-to-play {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 25%;
+  left: 68%;
+  width: 30%;
+}
+
+.how-to-play button {
+  background-color: rgba(100, 0, 255, 0.5);
+  border: none;
+  padding: 10px 30px;
+  margin-bottom: 20px;
+  min-width: 70%;
+  width: 40%;
+  color: white;
+  font-size: 24px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.how-to-play button:focus {
+  outline: 0;
+}
+
+.how-to-play button:hover {
+  color: rgba(0, 255, 255, 1);
+  box-shadow: 0 5px 15px rgba(145, 92, 182, 0.4);
+}
+
+#classic:focus,
+#zen:focus {
+  background-color: rgba(145, 92, 182, 0.4);
+}
+
 .tooltip .tooltiptext {
   visibility: hidden;
   position: absolute;
@@ -110,23 +131,11 @@ button:hover {
   font-size: 17px;
   text-transform: none;
   z-index: 1;
-  bottom: 125%;
-  left: 30%;
+  bottom: 110%;
+  left: 38%;
   margin-left: -120px;
-
   opacity: 0;
   transition: opacity 0.4s;
-}
-
-#how-to-tip {
-  width: 470px;
-  height: 70px;
-  margin-left: -180px;
-  list-style-type: none;
-}
-
-#zen-tip {
-  height: 50px;
 }
 
 .tooltip .tooltiptext::after {
@@ -143,6 +152,17 @@ button:hover {
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
+}
+
+#how-to-tip {
+  width: 470px;
+  height: 70px;
+  margin-left: -180px;
+  list-style-type: none;
+}
+
+#zen-tip {
+  height: 50px;
 }
 
 #audio,

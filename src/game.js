@@ -47,6 +47,7 @@ class Game {
   animate() {
     let dt = Date.now() - this.lastTime;
     this.lastTime = Date.now();
+
     this.ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
     this.updateGrid();
     this.animateGrid();
@@ -170,7 +171,6 @@ class Game {
       this.totalSec = 7000;
       timer.textContent = 0 + "." + "000" + "''";
       if (this.count > this.bestZenScore) {
-        debugger;
         this.bestZenScore = this.count;
         localStorage.removeItem("zenScore");
         localStorage.setItem("zenScore", this.count);

@@ -10,6 +10,7 @@ A single-player game containing two modes where the goal is to tap tiles quickly
 
 - Two game modes (Classic and Zen).
 - Dynamic play functionality using key press (d f j k) and mouse click.
+- Storage of best times and scores.
 
 #### Classic Mode
 
@@ -21,10 +22,10 @@ A single-player game containing two modes where the goal is to tap tiles quickly
 
 ### Key designs
 
-- Designed dynamic play by incorporating keypress and mouse click functionality using the event Window API to detect keypress codes and mouse offset positions to calculate the vertical and horizontal boundaries of valid target taps.
-- Utilized Canvas’s request animation frame to animate the movement of tiles to move by an amount of the tile’s height, while adding new rows of tiles at the top of the canvas as succeeding rows animated out of the canvas frame.
-- Incorporated accurate countdown timers using the Date Object to calculate the delta time between animation frames, allowing stable frame-rates by compensating for time taken by computations.
-- Incorporated two modes of game play by designing modular methods that executed the appropriate game logic given a mode, alongside maintaining DRY code.
+- Designed dynamic game play by incorporating keypress and mouse click functionality using the event listeners to access keypress codes and mouse offset values to calculate the vertical and horizontal boundaries of valid target taps.
+- Utilized Canvas’s request animation frame to animate the movement of tiles by a pre-specified amount, simultaneously adding new rows of tiles at the top of the canvas as rows animated out of the canvas frame.
+- Assured accurate countdown timers using JavaScript’s Date object to achieve stable frame-rates, compensating for time taken from computations by calculating the delta time between animation frames.
+- Incorporated two modes of game play by designing modular functions that executed the appropriate game logic given a mode, alongside achieving DRY code.
 
 ### Features in progress
 

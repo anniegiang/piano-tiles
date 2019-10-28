@@ -27,13 +27,46 @@ A single-player game containing two modes where the goal is to tap tiles quickly
 - Assured accurate countdown timers using JavaScript’s Date object to achieve stable frame-rates, compensating for time taken from computations by calculating the delta time between animation frames.
 - Incorporated two modes of game play by designing modular functions that executed the appropriate game logic given a mode, alongside achieving DRY code.
 
+### Key code snippets
+
 ```
+// Dynamically updates game logic given a mode
+
 updateGrid() {
     if (this.board.move && this.mode === "zen") {
       this.board.zenMoveRows();
     } else if (this.board.move && this.mode === "classic") {
       this.board.classicMoveRows();
     }
+  }
+
+```
+
+```
+// Stable time frame rates using delta time
+
+animate() {
+    let dt = Date.now() - this.lastTime;
+    this.lastTime = Date.now();
+
+    if (this.mode === "zen") {
+      this.renderCountdown(dt);
+    } else if (this.mode === "classic") {
+      this.renderTimer(dt);
+    }
+    ....
+}
+
+```
+
+```
+// Store the best Zen score using local storage
+
+if (this.count > this.bestZenScore) {
+    this.bestZenScore = this.count;
+    localStorage.removeItem("zenScore");
+    localStorage.setItem("zenScore", this.count);
+    this.renderZenScore();
   }
 
 ```

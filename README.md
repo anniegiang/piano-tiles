@@ -34,15 +34,15 @@ A single-player game containing two modes where the goal is to tap tiles quickly
 // to control the total movement per animation frame call
 
  zenMoveRows() {
-    for (let row of this.grid) {
-      for (let tile of row) {
-        tile.y += CONST.HEIGHT;
-      }
+  for (let row of this.grid) {
+    for (let tile of row) {
+      tile.y += CONST.HEIGHT;
     }
-    this.move = !this.move;
-    this.grid.unshift(this.createRow());
-    this.grid.pop();
   }
+  this.move = !this.move;
+  this.grid.unshift(this.createRow());
+  this.grid.pop();
+}
 
 ```
 
@@ -50,12 +50,12 @@ A single-player game containing two modes where the goal is to tap tiles quickly
 // Dynamically updates game logic given a mode
 
 updateGrid() {
-    if (this.board.move && this.mode === "zen") {
-      this.board.zenMoveRows();
-    } else if (this.board.move && this.mode === "classic") {
-      this.board.classicMoveRows();
-    }
+  if (this.board.move && this.mode === "zen") {
+    this.board.zenMoveRows();
+  } else if (this.board.move && this.mode === "classic") {
+    this.board.classicMoveRows();
   }
+}
 
 ```
 
@@ -63,14 +63,15 @@ updateGrid() {
 // Stable timers rates using delta time
 
 animate() {
-    let dt = Date.now() - this.lastTime;
-    this.lastTime = Date.now();
+  let dt = Date.now() - this.lastTime;
+  this.lastTime = Date.now();
 
-    if (this.mode === "zen") {
-      this.renderCountdown(dt);
-    } else if (this.mode === "classic") {
-      this.renderTimer(dt);
-    }
+  if (this.mode === "zen") {
+    this.renderCountdown(dt);
+  } else if (this.mode === "classic") {
+    this.renderTimer(dt);
+  }
+
     ....
 }
 
@@ -81,19 +82,19 @@ animate() {
 
 // Zen
 if (this.count > this.bestZenScore) {
-    this.bestZenScore = this.count;
-    localStorage.removeItem("zenScore");
-    localStorage.setItem("zenScore", this.count);
-    this.renderZenScore();
-  }
+  this.bestZenScore = this.count;
+  localStorage.removeItem("zenScore");
+  localStorage.setItem("zenScore", this.count);
+  this.renderZenScore();
+}
 
-  // Classic
-  if (totalTime < this.bestClassicScore) {
-    this.bestClassicScore = totalTime;
-    localStorage.removeItem("classicScore");
-    localStorage.setItem("classicScore", totalTime);
-    this.renderClassicScore();
-  }
+// Classic
+if (totalTime < this.bestClassicScore) {
+  this.bestClassicScore = totalTime;
+  localStorage.removeItem("classicScore");
+  localStorage.setItem("classicScore", totalTime);
+  this.renderClassicScore();
+}
 
 ```
 

@@ -4,7 +4,7 @@ Live: https://piano-tiles.herokuapp.com
 
 A single-player game containing two modes where the goal is to tap tiles quickly while avoiding non-target tiles, built using Vanilla JavaScript, HTML5 Canvas, and OOP design principles.
 
-![](piano-tiles-demo.gif)
+![](piano-tiles.gif)
 
 ### Features
 

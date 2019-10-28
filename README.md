@@ -30,6 +30,23 @@ A single-player game containing two modes where the goal is to tap tiles quickly
 ### Key code snippets
 
 ```
+// Animate rows to shift down by a specified amount
+// to control the total movement per animation frame call
+
+ zenMoveRows() {
+    for (let row of this.grid) {
+      for (let tile of row) {
+        tile.y += CONST.HEIGHT;
+      }
+    }
+    this.move = !this.move;
+    this.grid.unshift(this.createRow());
+    this.grid.pop();
+  }
+
+```
+
+```
 // Dynamically updates game logic given a mode
 
 updateGrid() {
@@ -43,7 +60,7 @@ updateGrid() {
 ```
 
 ```
-// Stable time frame rates using delta time
+// Stable timers rates using delta time
 
 animate() {
     let dt = Date.now() - this.lastTime;
@@ -60,13 +77,22 @@ animate() {
 ```
 
 ```
-// Store the best Zen score using local storage
+// Store the best played scores and times using local storage
 
+// Zen
 if (this.count > this.bestZenScore) {
     this.bestZenScore = this.count;
     localStorage.removeItem("zenScore");
     localStorage.setItem("zenScore", this.count);
     this.renderZenScore();
+  }
+
+  // Classic
+  if (totalTime < this.bestClassicScore) {
+    this.bestClassicScore = totalTime;
+    localStorage.removeItem("classicScore");
+    localStorage.setItem("classicScore", totalTime);
+    this.renderClassicScore();
   }
 
 ```

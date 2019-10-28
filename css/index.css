@@ -109,14 +109,14 @@ body {
   font-size: 17px;
   text-transform: none;
   z-index: 1;
-  bottom: 125%;
-  left: 30%;
+  bottom: 110%;
+  left: 38%;
   margin-left: -120px;
   opacity: 0;
   transition: opacity 0.4s;
 }
 
-.tooltip .tooltiptext::after {
+/* .tooltip .tooltiptext::after {
   content: "";
   position: absolute;
   top: 100%;
@@ -125,7 +125,7 @@ body {
   border-width: 5px;
   border-style: solid;
   border-color: #555 transparent transparent transparent;
-}
+} */
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
